@@ -112,7 +112,7 @@
 <div class="header"><div class="eyebrow"><a href="https://mahdioneill.github.io/ai-fluency/" style="color:inherit;text-decoration:none">Patrick Mahdi O’Neill · AI Fluency Training · Dubai</a></div><div class="title">How well do you <em>know AI</em>?</div><div class="tagline">The AI Knowledge Challenge: the terms behind AI at work, from the basics to the boardroom, every answer explained.</div></div>
 <div class="crumbs" id="crumbs"></div>
 <div id="app"></div>
-<div class="foot">Patrick Mahdi O’Neill · <a href="https://mahdioneill.github.io/ai-fluency/" target="_blank" rel="noopener">AI fluency training for finance professionals</a> · <a href="https://mahdioneill.github.io/ai-fluency/diagnostic/">Where are you with AI?</a> · <a href="#" id="reset">Clear my progress</a></div>
+<div class="foot">Patrick Mahdi O’Neill · <a href="https://mahdioneill.github.io/ai-fluency/" target="_blank" rel="noopener">AI fluency training for finance professionals</a> · <a href="https://mahdioneill.github.io/ai-fluency/diagnostic/">Where are you with AI?</a> · <a href="https://mahdioneill.github.io/ai-fluency/learn/" target="_blank" rel="noopener">How to learn AI</a> · <a href="#" id="reset">Clear my progress</a></div>
 </div>
 <div class="toast" id="toast"></div>
 <script>
@@ -245,7 +245,7 @@
       if (n >= PASS && next) h += '<button class="btn solid" data-start="' + next.id + '">Start ' + esc(next.title) + '</button>';
       h += '<button class="btn" data-start="' + t.id + '">Retake ' + esc(t.title) + '</button>';
     } else h += '<button class="btn solid" data-quick>Another ten</button>';
-    h += '<button class="btn quiet" data-share>Copy my result</button><a class="btn quiet" target="_blank" rel="noopener" href="https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(location.origin + location.pathname) + '">Share on LinkedIn</a>'
+    h += '<button class="btn quiet" data-share>Copy my result</button><button class="btn quiet" data-notes title="Score, every term with its note, and the questions you missed: paste into a notebook or an assistant">Copy my notes</button><a class="btn quiet" target="_blank" rel="noopener" href="https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(location.origin + location.pathname) + '">Share on LinkedIn</a>'
        + '<button class="btn quiet" data-home>All rounds</button></div>';
     h += '<div class="section-label">The ' + terms.length + ' terms in this round · tap any to re-read its note</div><div class="terms">';
     terms.forEach((o, j) => { h += '<button class="term" data-t="' + j + '">' + esc(o.term) + '</button>'; });
@@ -254,6 +254,20 @@
     app.querySelectorAll('[data-start]').forEach(b => b.addEventListener('click', () => start('course', b.dataset.start)));
     const qk = $('[data-quick]'); if (qk) qk.addEventListener('click', () => start('quick'));
     $('[data-home]').addEventListener('click', () => go('#'));
+    $('[data-notes]').addEventListener('click', () => {
+      const L = ['AI Knowledge Challenge · ' + (t ? t.title + ' round' : 'Quick draw') + ' · ' + n + '/' + total, ''];
+      const missed = S.qs.map((q, i) => ({q, a: S.answers[i]})).filter(x => x.a && !x.a.ok);
+      L.push('Questions I missed (' + missed.length + '):');
+      if (!missed.length) L.push('- none');
+      missed.forEach(({q, a}) => { const c = q.options.find(o => o.correct); const ch = q.options[a.chosen]; L.push('- ' + q.stem); L.push('  Correct: ' + c.term + ' — ' + c.note); L.push('  I chose: ' + ch.term + ' — ' + ch.note); });
+      L.push('', 'All terms in this round:');
+      S.qs.forEach(q => q.options.forEach(o => L.push('- ' + (o.gloss || o.term) + ': ' + o.note)));
+      L.push('', location.origin + location.pathname + (t ? '#' + t.id : '#quick'));
+      const txt = L.join('\n');
+      const fallback = () => { prompt('Copy your notes:', txt); };
+      let p = null; try { p = navigator.clipboard && navigator.clipboard.writeText ? navigator.clipboard.writeText(txt) : null; } catch (e) { p = null; }
+      if (p && p.then) p.then(() => toast('Copied · paste into a notebook or an assistant'), fallback); else fallback();
+    });
     $('[data-share]').addEventListener('click', () => {
       const txt = 'AI Knowledge Challenge: ' + n + '/' + total + (t ? ' on the ' + t.title + ' round' : ' on the quick draw') + '. ' + location.origin + location.pathname;
       const fallback = () => { prompt('Copy your result:', txt); };

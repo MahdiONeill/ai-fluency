@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to learn AI — Patrick Mahdi O’Neill</title>
+<meta name="description" content="How to learn AI for work: why you are learning, a useful habit, what learning AI actually means, and honest advice on quizzes, asking the AI itself, courses and the vendors' academies, reading and watching, Gemini Notebook with prompts to copy, and colleagues.">
+<meta property="og:title" content="How to learn AI: tips, advice and prompts">
+<meta property="og:description" content="How to learn AI for work: why you are learning, a useful habit, what learning AI actually means, and honest advice on quizzes, asking the AI itself, courses and the vendors' academies, reading and watching, Gemini Notebook with prompts to copy, and colleagues.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mahdioneill.github.io/ai-fluency/learn/">
+<meta property="og:image" content="https://mahdioneill.github.io/ai-fluency/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2212%22 fill=%22%231a2a4a%22/%3E%3Ctext x=%2232%22 y=%2245%22 font-family=%22Georgia,serif%22 font-size=%2238%22 fill=%22%23b8922a%22 text-anchor=%22middle%22%3EP%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --ink: #1a2a4a; --ink-deep: #0e1117; --gold: #b8922a; --gold-light: #d4aa4a; --cream: #f7f4ef; --cream-dark: #ede9e1; --rule: #c8bfad; --muted: #6b6355; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body { background: var(--cream); color: var(--ink); font-family: 'Instrument Sans', sans-serif; }
+  a { color: var(--gold); }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 36px 20px 80px; }
+  .header { border-top: 3px solid var(--ink); padding: 30px 0 22px; margin-bottom: 22px; border-bottom: 1px solid var(--rule); }
+  .eyebrow { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+  .title { font-family: 'Cormorant Garamond', serif; font-size: 46px; font-weight: 300; line-height: 1.02; letter-spacing: -0.01em; }
+  .title em { font-style: italic; color: var(--gold); }
+  .tagline { font-family: 'Cormorant Garamond', serif; font-size: 19px; color: var(--ink); margin-top: 12px; max-width: 620px; line-height: 1.45; }
+  .nav { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 14px 0 0; font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--gold); }
+  h2 { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 400; line-height: 1.15; margin: 38px 0 12px; padding-top: 18px; border-top: 1px solid var(--rule); }
+  h2 em { font-style: italic; color: var(--gold); }
+  h3 { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; line-height: 1.2; margin: 26px 0 8px; }
+  p { font-size: 15px; line-height: 1.62; margin: 0 0 13px; max-width: 640px; }
+  p b { font-weight: 600; }
+  ul, ol { margin: 0 0 14px 22px; max-width: 620px; }
+  li { font-size: 15px; line-height: 1.6; margin-bottom: 6px; }
+  li b { font-weight: 600; }
+  .prompt { border: 1px solid var(--rule); background: #fbf9f5; padding: 14px 16px 12px; margin: 6px 0 16px; max-width: 640px; }
+  .prompt .lb { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+  .prompt .tx { font-family: 'DM Mono', monospace; font-size: 12px; line-height: 1.6; color: var(--ink); white-space: pre-wrap; }
+  .copy { border: 1px solid var(--rule); background: none; color: var(--muted); font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; padding: 5px 9px; cursor: pointer; white-space: nowrap; }
+  .copy:hover { border-color: var(--gold); color: var(--gold); }
+  .copybox { width: 100%; min-height: 90px; border: 1px solid var(--rule); background: var(--cream); font-family: 'DM Mono', monospace; font-size: 11px; line-height: 1.5; padding: 10px; color: var(--ink); display: none; margin-top: 8px; }
+  .copybox.show { display: block; }
+  details { border: 1px solid var(--rule); padding: 0 16px; margin: 4px 0 18px; max-width: 640px; }
+  summary { cursor: pointer; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); padding: 13px 0; list-style: none; }
+  summary::-webkit-details-marker { display: none; }
+  summary::before { content: '+ '; }
+  details[open] summary::before { content: '\2212  '; }
+  details .inner { padding: 2px 0 10px; }
+  .checked { font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-top: 28px; }
+  .foot { font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--rule); line-height: 2; }
+  .foot a { text-decoration: none; }
+  .toast { position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%); background: var(--ink); color: var(--cream); font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; padding: 10px 16px; opacity: 0; transition: opacity .2s; pointer-events: none; }
+  .toast.show { opacity: 1; }
+  @media (max-width: 640px) {
+    .wrap { padding: 22px 16px 60px; }
+    .title { font-size: 36px; }
+    h2 { font-size: 26px; }
+    p, li { font-size: 14.5px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="header"><div class="eyebrow"><a href="https://mahdioneill.github.io/ai-fluency/" style="color:inherit;text-decoration:none">Patrick Mahdi O’Neill · AI Fluency Training · Dubai</a></div><div class="title">How to <em>learn AI</em></div><div class="tagline">Practical ways to learn AI for work, with a few prompts to try. Start with one task you understand, a tool your organisation permits, and a result you can check. Choose a method below, or jump to <a href="#routine">the weekly routine</a>.</div><div class="nav"><a href="#why">Why</a><a href="#habit">A habit</a><a href="#layers">Three layers</a><a href="#ways">Ways to learn</a><a href="#routine">Weekly routine</a><a href="#signs">Signs</a></div></div>
+<main><h2 id="why">Why are you learning this?</h2>
+<p>Your reason for learning helps you decide where to start.</p>
+<p><b>Interest or curiosity.</b> You want to understand what these tools can do. Try <a href="https://mahdioneill.github.io/ai-fluency/challenge/" target="_blank" rel="noopener">the challenge</a>, read around a topic and explore an approved tool. Follow what interests you.</p>
+<p><b>Necessity.</b> Something in your work now needs it: a process has changed, a client expects it, a report has to be done a new way. Find the one task, learn only what that task needs, and let the rest wait.</p>
+<p><b>The job demands it.</b> Your employer has rolled a tool out and expects you to use it. Start with the tool you have been given, not the one you read about. Learn the three or four features that matter for your work, and ask who in your organisation already uses it well.</p>
+<p><b>Fear of being left behind.</b> The pace can feel overwhelming. Choose one useful topic and return to it regularly; you do not need to follow every announcement.</p>
+<p><b>You oversee people who use it.</b> Focus on capabilities, limitations and the questions to ask. A short demonstration and a few supervised experiments can make the governance issues more concrete. The <a href="https://mahdioneill.github.io/ai-fluency/challenge/#board" target="_blank" rel="noopener">Board track</a> of the challenge is written for this.</p>
+<p>Most people are a mix. Pick the one that is loudest this month.</p>
+<h2 id="habit">A useful habit</h2>
+<p>Whenever a recurring task on a computer feels slow or awkward, ask:</p>
+<ul><li><b>Could AI do this, or part of it, better or faster than I do?</b></li><li><b>Is this use permitted, with this information?</b></li><li><b>How would I check whether the result is any good?</b></li></ul>
+<p>Often the answer to the first question is no, and that is fine. The point is to ask every time, because the answer changes from month to month, and the tasks worth handing over are rarely the ones you expected. Count the time spent checking and correcting as part of the task.</p>
+<p>The second half of the habit is a willingness to experiment. Start with something small: drafting a routine email, summarising a public document or formatting a practice spreadsheet. Try it, inspect the result and adjust. A poor answer may mean the instructions need work, the sources are thin, or the tool is the wrong one for the job.</p>
+<p>For early experiments, use public or fictional material and work on copies. Use the account and features your organisation has approved for that purpose, keep experiments away from live systems, and check outputs before using or sharing them. Copying a confidential document does not make it safe to upload, and approval of a product does not necessarily cover every use or connection.</p>
+<h2 id="layers">What “learning AI” actually means</h2>
+<p>People say “learning AI” and mean three different things. Knowing which one you are short of saves a lot of time.</p>
+<ol><li><b>Using the tools well.</b> Giving clear instructions, working with files and using the features available in your approved tool.</li><li><b>Understanding the ideas behind them.</b> Concepts such as context, hallucination and retrieval help explain how the tools work and where they can go wrong.</li><li><b>Exercising judgement.</b> Where the tools go wrong, what regulators expect, what you must check before you rely on a result. This is the layer a finance professional cannot skip.</li></ol>
+<p>The rounds in the challenge map onto these three: the <a href="https://mahdioneill.github.io/ai-fluency/challenge/#claude" target="_blank" rel="noopener">Claude</a> and <a href="https://mahdioneill.github.io/ai-fluency/challenge/#g1" target="_blank" rel="noopener">ChatGPT</a> rounds are the first, the <a href="https://mahdioneill.github.io/ai-fluency/challenge/#basic" target="_blank" rel="noopener">three levels</a> are mostly the second, and the <a href="https://mahdioneill.github.io/ai-fluency/challenge/#board" target="_blank" rel="noopener">Board track</a> and <a href="https://mahdioneill.github.io/ai-fluency/challenge/#finance" target="_blank" rel="noopener">Finance in practice</a> are the third.</p>
+<h2 id="ways">Ways to learn</h2>
+<h3 id="doing">Learning by doing</h3>
+<p>Pick a small task you understand and try part of it with an approved assistant. Compare the result with your usual approach: what was accurate, what needed correction, and was the checking effort worthwhile? Keep a brief note of what you tried.</p>
+<p>The difficulty is knowing what to try. If you have only used an assistant as a chat box, you may not think to ask it for a working spreadsheet, to read connected email or to run a task on a schedule. Depending on the tool and your permissions, it may do all three. The <a href="https://mahdioneill.github.io/ai-fluency/diagnostic/" target="_blank" rel="noopener">self-diagnostic</a> and the <a href="https://mahdioneill.github.io/ai-fluency/challenge/#claude" target="_blank" rel="noopener">product rounds</a> of the challenge can suggest possibilities; check which are available and approved in your workplace.</p>
+<h3 id="quizzes">Quizzes</h3>
+<p>Quizzes help you recall ideas and spot gaps, including the things you did not know you did not know. Read the explanation even when you guessed correctly, then revisit missed terms a few days later. Try explaining an answer without looking at the options.</p>
+<p>On this site, <a href="https://mahdioneill.github.io/ai-fluency/challenge/" target="_blank" rel="noopener">the challenge</a> has nine rounds, a <a href="https://mahdioneill.github.io/ai-fluency/challenge/#quick" target="_blank" rel="noopener">Quick draw</a> of ten questions from the general-knowledge and Board rounds, and a searchable <a href="https://mahdioneill.github.io/ai-fluency/challenge/#glossary" target="_blank" rel="noopener">jargon buster</a>. Each question has its own link to share with a colleague.</p>
+<h3 id="ask">Ask the AI itself</h3>
+<p>Describe a task in general terms and ask an approved assistant how it might help. It can suggest approaches to explore. Check feature claims against current help pages and the options available in your account.</p>
+<p>Three things to know when you use AI to learn AI:</p>
+<ul><li><b>Different assistants can reveal different possibilities.</b> Comparing answers from Claude, ChatGPT or Gemini may expose assumptions or omissions. Agreement does not prove an answer is right. Check important claims against an authoritative source, and use only tools permitted for the information you provide.</li><li><b>It can be wrong about itself.</b> An assistant may describe an unavailable feature or miss one your account has. Check the vendor’s current help pages and your account settings. Distinguish “I can explain how” from “I can do it here”.</li><li><b>It may be too agreeable.</b> A fluent answer can echo your assumptions rather than test them. Ask which assumptions are weak, what evidence would change the conclusion and what could go wrong. Then check the evidence yourself.</li></ul>
+<div class="prompt"><div class="lb"><span>A starter prompt</span><button class="copy" data-copy="0">Copy</button></div><div class="tx">I am a [role] in [sector], using [tool and work account, if known]. I regularly [describe the task without confidential details]. Suggest which steps you could help with and which need human judgement or approval. For each suggestion, state what information or access you would need and how I could check the result. Flag anything you cannot confirm about your available features. Suggest one small experiment using public or fictional material. Give advice only; do not take action.</div><textarea class="copybox" readonly></textarea></div>
+<h3 id="courses">Courses</h3>
+<p>A course can provide structure, practice and someone to ask. Its value depends on context: examples from your own kind of work give you something to attach the learning to, and examples from another sector give you less.</p>
+<p>Before booking, check whether the examples fit your work, whether you will practise and receive feedback, and when the product demonstrations were updated. A simple test: will you leave with something you can use on Monday, not just something you understood on Friday? Look for attention to verification and your organisation’s rules, as well as features.</p>
+<p><b>The vendors’ own academies.</b> Each major vendor now runs a free, self-paced learning site for its own product, with short video lessons and a certificate at the end. They are the best answer to “how do I use the tool I have been given”, and they are kept current. At the time of writing: <a href="https://academy.claude.com/" target="_blank" rel="noopener">Claude Academy</a>, <a href="https://academy.openai.com/" target="_blank" rel="noopener">OpenAI Academy</a>, <a href="https://grow.google/ai/" target="_blank" rel="noopener">Google’s AI courses</a>, and <a href="https://learn.microsoft.com/training/" target="_blank" rel="noopener">Microsoft Learn</a>’s Microsoft 365 Copilot paths. They teach the tool, not your sector, so pair one with a real task of your own.</p>
+<h3 id="reading">Reading and watching</h3>
+<p>Use vendors’ help pages and release notes for features, and your organisation’s guidance for permitted use. Check dates, account requirements and whether the instructions match what you see.</p>
+<p>Choose one or two independent writers or teachers who explain their evidence and correct their mistakes. Social posts can help you discover ideas; follow important claims back to their sources.</p>
+<p>Videos can explain concepts and demonstrate features, and seeing a feature used is often the quickest way to understand it. The difficulty is finding the ten minutes that apply to your job among the hours that are merely interesting. Search for a specific question or task, check the date, and pause to try a useful step yourself.</p>
+<h3 id="notebook">Gemini Notebook (formerly NotebookLM)</h3>
+<p>Worth a section of its own, because it fills a gap the others leave. Gemini Notebook, formerly NotebookLM, is Google’s research and learning tool. It has a free version with usage limits, alongside paid plans. You can use it to study a selected collection of sources and follow citations back to the relevant passages. It also has web-research features. For source-based learning, tell it to use your selected material and check that the cited passages support the answer.</p>
+<p><b>If you are starting from scratch</b>, you do not need your own sources. In the Sources panel, enter a topic or question and use Fast Research to search the web. Review the results before importing them. Deep Research offers a more extensive search and report. You can then turn the sources into Audio and Video Overviews, slide decks, mind maps, study guides and other reports, flashcards and quizzes. The default Audio Overview uses two AI hosts; other formats are available. Choose one format that helps you study, and review it for errors. With flashcards and quizzes, attempt the answer before revealing the explanation.</p>
+<p><b>If you want it to be useful for your work</b>, build a small notebook of the right sources rather than a large one of anything. A good starter set:</p>
+<ul><li>the help pages for the tool your organisation has given you;</li><li>your regulator’s guidance on AI, if it has published any;</li><li>your own organisation’s AI policy, if you are permitted to upload it;</li><li>one good explainer of the ideas, so the notebook can explain terms as they come up.</li></ul>
+<p>Check each source’s date, jurisdiction and purpose. Keep current requirements separate from commentary, and check that the imported material includes the passages you need.</p>
+<p><b>Connect it to the quizzes.</b> After a round of <a href="https://mahdioneill.github.io/ai-fluency/challenge/" target="_blank" rel="noopener">the challenge</a>, use <em>Copy my notes</em> on the result screen: it copies every term in the round with its explanation and the questions you missed. Paste that into a notebook as a source, add fuller sources on those topics, and ask:</p>
+<div class="prompt"><div class="lb"><span>From a quiz round</span><button class="copy" data-copy="1">Copy</button></div><div class="tx">Using these sources, explain the terms I missed in a short study guide. Cite each explanation and flag anything the sources do not cover.</div><textarea class="copybox" readonly></textarea></div>
+<p>Then use Studio to create flashcards or a quiz focused on those terms. You can also add your map from the <a href="https://mahdioneill.github.io/ai-fluency/diagnostic/" target="_blank" rel="noopener">self-diagnostic</a> and the relevant tool guidance, then ask:</p>
+<div class="prompt"><div class="lb"><span>From your diagnostic map</span><button class="copy" data-copy="2">Copy</button></div><div class="tx">Using my map and these sources, suggest a four-week learning plan for these three ideas: [list]. Allow 30 minutes a week. Include one small exercise and a way to check it each week. Use public or fictional material, flag missing guidance and note any workplace permissions I need to confirm.</div><textarea class="copybox" readonly></textarea></div>
+<p><b>Its limits.</b> The material you select shapes the answer, but citations do not guarantee accuracy or completeness. Check important claims in the original sources and confirm that they are current. Before adding workplace information, check that your organisation permits this account and use. Review sharing settings before sharing a notebook or its outputs.</p>
+<details><summary>Seven more prompts to copy</summary><div class="inner"><div class="prompt"><div class="lb"><span>Explain the ideas</span><button class="copy" data-copy="3">Copy</button></div><div class="tx">Using the selected sources, explain five key ideas for a [role] in [sector]. Define unfamiliar terms and cite the supporting passages. Use examples from the sources where possible; clearly label any hypothetical examples. Flag gaps rather than filling them with assumptions.</div><textarea class="copybox" readonly></textarea></div><div class="prompt"><div class="lb"><span>Study guide</span><button class="copy" data-copy="4">Copy</button></div><div class="tx">Using the selected sources, write a study guide of up to 600 words, starting with the basics. Define key terms as they appear, cite each section and finish with three questions I can answer without looking back.</div><textarea class="copybox" readonly></textarea></div><div class="prompt"><div class="lb"><span>Quiz me, one question at a time</span><button class="copy" data-copy="5">Copy</button></div><div class="tx">Using only the selected sources, ask me ten multiple-choice questions, one at a time, with four options and one best answer. Wait for my answer before explaining why each option is right or wrong, with a source citation. Then ask the next question. Avoid questions the sources cannot clearly answer.</div><textarea class="copybox" readonly></textarea></div><div class="prompt"><div class="lb"><span>What to study first</span><button class="copy" data-copy="6">Copy</button></div><div class="tx">I am a [role] in [sector/jurisdiction]. Using the selected sources, suggest what to study first and what can wait. Explain your reasoning and cite the relevant passages. Do not recommend skipping mandatory training or policy requirements. Flag anything that needs confirmation from my organisation.</div><textarea class="copybox" readonly></textarea></div><div class="prompt"><div class="lb"><span>Compare sources</span><button class="copy" data-copy="7">Copy</button></div><div class="tx">Identify any apparent disagreements between the selected sources. For each, cite the passages and state the publication or effective dates where available. Distinguish a contradiction from a difference in scope, jurisdiction or terminology. Do not assume the newest source overrides the others.</div><textarea class="copybox" readonly></textarea></div><div class="prompt"><div class="lb"><span>Glossary</span><button class="copy" data-copy="8">Copy</button></div><div class="tx">From the selected sources, choose up to 20 terms most useful to a [role]. Give each a plain-English definition and a source citation. Flag terms that the sources use differently or do not clearly define.</div><textarea class="copybox" readonly></textarea></div><div class="prompt"><div class="lb"><span>Briefing for my manager</span><button class="copy" data-copy="9">Copy</button></div><div class="tx">Using the selected sources, draft a briefing of up to 400 words for my manager. Cover the main findings, possible implications for a [type of team] and questions we need to resolve. Cite factual claims and separate source requirements from your suggestions. Do not assume our organisation has approved a tool or use.</div><textarea class="copybox" readonly></textarea></div><p>For interactive flashcards and quizzes, use the Studio panel rather than the chat; it has its own options for difficulty and focus.</p></div></details>
+<h3 id="colleagues">Learning with colleagues</h3>
+<p>Ask someone who uses your approved tool well to show you a small task, including how they check the result. Try it yourself and ask for feedback.</p>
+<p>Explaining an idea to someone else can also reveal gaps. Try a ten-minute “what I tried this week” discussion: what worked, what failed and what you checked.</p>
+<h2 id="routine">A routine that fits in a week</h2>
+<p>Try this as a starting point:</p>
+<ul><li><b>Twenty minutes</b> reading or watching something relevant to your work.</li><li><b>Ten minutes</b> revisiting questions and terms, including ones you previously missed.</li><li><b>Twenty minutes</b> on a small experiment, including checking the result.</li><li><b>A brief conversation</b> with a colleague, when practical.</li></ul>
+<p>Revisit one task over several weeks and keep notes on what changes. If an experiment needs longer, make it smaller or spread it over two sessions.</p>
+<h2 id="signs">How you know it is working</h2>
+<p>Look for three signs:</p>
+<ol><li>You can explain a useful idea without looking it up.</li><li>You can show where AI helped with a task, or explain why you decided against using it.</li><li>You can identify a limitation and describe how you checked the result.</li></ol>
+<p>Use what you have learned to choose your next experiment.</p>
+<p>If you prefer a structured approach, <a href="https://mahdioneill.github.io/ai-fluency/" target="_blank" rel="noopener">the courses on this site</a> use examples from professional practice.</p></main>
+<div class="checked">Product details checked: 7 October 2026</div>
+<div class="foot">Patrick Mahdi O’Neill · <a href="https://mahdioneill.github.io/ai-fluency/">AI fluency training for finance professionals</a> · <a href="https://mahdioneill.github.io/ai-fluency/challenge/">The AI Knowledge Challenge</a> · <a href="https://mahdioneill.github.io/ai-fluency/diagnostic/">Where are you with AI?</a></div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+(function(){
+  const P = ["I am a [role] in [sector], using [tool and work account, if known]. I regularly [describe the task without confidential details]. Suggest which steps you could help with and which need human judgement or approval. For each suggestion, state what information or access you would need and how I could check the result. Flag anything you cannot confirm about your available features. Suggest one small experiment using public or fictional material. Give advice only; do not take action.", "Using these sources, explain the terms I missed in a short study guide. Cite each explanation and flag anything the sources do not cover.", "Using my map and these sources, suggest a four-week learning plan for these three ideas: [list]. Allow 30 minutes a week. Include one small exercise and a way to check it each week. Use public or fictional material, flag missing guidance and note any workplace permissions I need to confirm.", "Using the selected sources, explain five key ideas for a [role] in [sector]. Define unfamiliar terms and cite the supporting passages. Use examples from the sources where possible; clearly label any hypothetical examples. Flag gaps rather than filling them with assumptions.", "Using the selected sources, write a study guide of up to 600 words, starting with the basics. Define key terms as they appear, cite each section and finish with three questions I can answer without looking back.", "Using only the selected sources, ask me ten multiple-choice questions, one at a time, with four options and one best answer. Wait for my answer before explaining why each option is right or wrong, with a source citation. Then ask the next question. Avoid questions the sources cannot clearly answer.", "I am a [role] in [sector/jurisdiction]. Using the selected sources, suggest what to study first and what can wait. Explain your reasoning and cite the relevant passages. Do not recommend skipping mandatory training or policy requirements. Flag anything that needs confirmation from my organisation.", "Identify any apparent disagreements between the selected sources. For each, cite the passages and state the publication or effective dates where available. Distinguish a contradiction from a difference in scope, jurisdiction or terminology. Do not assume the newest source overrides the others.", "From the selected sources, choose up to 20 terms most useful to a [role]. Give each a plain-English definition and a source citation. Flag terms that the sources use differently or do not clearly define.", "Using the selected sources, draft a briefing of up to 400 words for my manager. Cover the main findings, possible implications for a [type of team] and questions we need to resolve. Cite factual claims and separate source requirements from your suggestions. Do not assume our organisation has approved a tool or use."];
+  const $ = s => document.querySelector(s);
+  const toast = m => { const t = $('#toast'); t.textContent = m; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 1800); };
+  document.querySelectorAll('[data-copy]').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.copy; const txt = P[i];
+    const box = b.closest('.prompt').querySelector('.copybox');
+    const fallback = () => { box.value = txt; box.classList.add('show'); box.focus(); box.select(); toast('Select and copy the text below'); };
+    let p = null; try { p = navigator.clipboard && navigator.clipboard.writeText ? navigator.clipboard.writeText(txt) : null; } catch (e) { p = null; }
+    if (p && p.then) p.then(() => toast('Copied'), fallback); else fallback();
+  }));
+})();
+</script>
+</body>
+</html>
