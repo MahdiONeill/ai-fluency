@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Where are you with AI? — Patrick Mahdi O’Neill</title>
+<meta name="description" content="Where are you with AI? A few minutes of ticks and you get a personal opportunity map: the work you could hand to AI, what it would look like, and the feature that makes it possible. No score, no verdict.">
+<meta property="og:title" content="Where are you with AI? Your AI opportunity map">
+<meta property="og:description" content="Where are you with AI? A few minutes of ticks and you get a personal opportunity map: the work you could hand to AI, what it would look like, and the feature that makes it possible. No score, no verdict.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mahdioneill.github.io/ai-fluency/diagnostic/">
+<meta property="og:image" content="https://mahdioneill.github.io/ai-fluency/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2212%22 fill=%22%231a2a4a%22/%3E%3Ctext x=%2232%22 y=%2245%22 font-family=%22Georgia,serif%22 font-size=%2238%22 fill=%22%23b8922a%22 text-anchor=%22middle%22%3EP%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --ink: #1a2a4a; --ink-deep: #0e1117; --gold: #b8922a; --gold-light: #d4aa4a; --cream: #f7f4ef; --cream-dark: #ede9e1; --rule: #c8bfad; --muted: #6b6355; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { background: var(--cream); color: var(--ink); font-family: 'Instrument Sans', sans-serif; }
+  a { color: var(--gold); }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 36px 20px 80px; }
+  .header { border-top: 3px solid var(--ink); padding: 30px 0 22px; margin-bottom: 26px; border-bottom: 1px solid var(--rule); }
+  .eyebrow { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+  .title { font-family: 'Cormorant Garamond', serif; font-size: 46px; font-weight: 300; line-height: 1.02; letter-spacing: -0.01em; }
+  .title em { font-style: italic; color: var(--gold); }
+  .tagline { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-style: italic; color: var(--muted); margin-top: 10px; max-width: 600px; line-height: 1.4; }
+  .step { font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); display: flex; justify-content: space-between; margin-bottom: 10px; }
+  .step .t { color: var(--gold); }
+  .progress { height: 2px; background: var(--cream-dark); margin-bottom: 24px; }
+  .progress i { display: block; height: 100%; background: var(--gold); transition: width .25s; }
+  .intro { font-family: 'Cormorant Garamond', serif; font-size: 19px; line-height: 1.5; margin-bottom: 18px; max-width: 640px; }
+  .small { font-size: 12.5px; color: var(--muted); line-height: 1.5; margin-bottom: 18px; max-width: 640px; }
+  .section-label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin: 26px 0 12px; padding-bottom: 8px; border-bottom: 1px solid var(--rule); }
+  .q { font-family: 'Cormorant Garamond', serif; font-size: 22px; line-height: 1.3; margin: 22px 0 4px; }
+  .hint { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+  .ticks { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tick { border: 1px solid var(--rule); background: none; padding: 9px 13px; font-family: 'Instrument Sans', sans-serif; font-size: 13.5px; color: var(--ink); cursor: pointer; }
+  .tick:hover { border-color: var(--gold); }
+  .tick.on { border: 1.5px solid var(--gold); background: #f3ead3; }
+  .row { display: grid; grid-template-columns: 1fr auto; gap: 8px 16px; align-items: start; padding: 12px 0; border-bottom: 1px solid var(--cream-dark); }
+  .row .nm { font-size: 14px; font-weight: 600; }
+  .row .nt { font-size: 12.5px; color: var(--muted); line-height: 1.45; margin-top: 2px; }
+  .seg { display: flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end; }
+  .seg button { border: 1px solid var(--rule); background: none; padding: 7px 10px; font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); cursor: pointer; white-space: nowrap; }
+  .seg button:hover { border-color: var(--gold); color: var(--ink); }
+  .seg button.on { border: 1.5px solid var(--gold); color: var(--gold); background: #f3ead3; }
+  .optional-toggle { font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); background: none; border: none; cursor: pointer; padding: 12px 0; }
+  .btnrow { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 26px; }
+  .btn { display: inline-block; background: none; border: 1.5px solid var(--gold); color: var(--gold); padding: 10px 18px; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; text-decoration: none; }
+  .btn:hover { background: var(--gold); color: var(--cream); }
+  .btn.solid { background: var(--ink); border-color: var(--ink); color: var(--cream); }
+  .btn.solid:hover { background: var(--gold); border-color: var(--gold); }
+  .btn.quiet { border-color: var(--rule); color: var(--muted); }
+  .btn.quiet:hover { background: none; color: var(--gold); border-color: var(--gold); }
+  .lead { font-family: 'Cormorant Garamond', serif; font-size: 23px; line-height: 1.35; margin: 6px 0 10px; }
+  .idea { border: 1px solid var(--rule); padding: 14px 16px; margin-bottom: 8px; cursor: pointer; }
+  .idea:hover { border-color: var(--gold); }
+  .idea.chosen { border: 1.5px solid var(--gold); background: #f3ead3; cursor: default; }
+  .idea .nm { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; line-height: 1.15; }
+  .idea .ex { font-size: 13px; line-height: 1.5; color: var(--muted); margin-top: 4px; }
+  .idea .ft { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-top: 8px; }
+  .idea .ft a { text-decoration: none; }
+  .idea .pick { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 8px; }
+  .note { padding: 11px 0; border-bottom: 1px solid var(--cream-dark); font-size: 13px; line-height: 1.5; color: var(--muted); }
+  .note b { color: var(--ink); font-weight: 600; }
+  .note a { text-decoration: none; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip { border: 1px solid var(--rule); padding: 5px 10px; font-size: 12px; cursor: pointer; background: none; font-family: inherit; color: var(--ink); }
+  .chip:hover, .chip.open { border-color: var(--gold); color: var(--gold); }
+  .chip-note { font-size: 13px; line-height: 1.5; color: var(--muted); padding: 12px 0 4px; display: none; }
+  .chip-note.show { display: block; }
+  .chip-note b { color: var(--ink); }
+  .more { background: none; border: none; color: var(--gold); font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; padding: 10px 0; }
+  .copybox { width: 100%; min-height: 160px; border: 1px solid var(--rule); background: var(--cream); font-family: 'DM Mono', monospace; font-size: 11px; line-height: 1.5; padding: 12px; color: var(--ink); display: none; margin-top: 10px; }
+  .copybox.show { display: block; }
+  .foot { font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--rule); line-height: 2; }
+  .foot a { text-decoration: none; }
+  .toast { position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%); background: var(--ink); color: var(--cream); font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; padding: 10px 16px; opacity: 0; transition: opacity .2s; pointer-events: none; }
+  .toast.show { opacity: 1; }
+  @media (max-width: 640px) {
+    .wrap { padding: 22px 16px 60px; }
+    .title { font-size: 36px; }
+    .row { grid-template-columns: 1fr; }
+    .seg { justify-content: flex-start; }
+    .lead { font-size: 21px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="header"><div class="eyebrow"><a href="https://mahdioneill.github.io/ai-fluency/" style="color:inherit;text-decoration:none">Patrick Mahdi O’Neill · AI Fluency Training · Dubai</a></div><div class="title">Where are you <em>with AI</em>?</div><div class="tagline">A few minutes, no typing. Tick what applies and you get a short, personal map: the kinds of work you could hand to AI, what each one would look like, and the feature that makes it possible. No score, no level, no verdict.</div><div class="small" style="margin-top:12px">Your answers are processed in this page and are not sent to us. Copy your map if you want to keep it.</div></div>
+<div id="app"></div>
+<div class="foot">Patrick Mahdi O’Neill · <a href="https://mahdioneill.github.io/ai-fluency/">AI fluency training for finance professionals</a> · <a href="https://mahdioneill.github.io/ai-fluency/challenge/">The AI Knowledge Challenge</a></div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+(function(){
+  const C = {"title": "Where are you with AI?", "result_title": "Your AI opportunity map", "intro": "A few minutes, no typing. Tick what applies and you get a short, personal map: the kinds of work you could hand to AI, what each one would look like, and the feature that makes it possible. No score, no level, no verdict.", "privacy": "Your answers are processed in this page and are not sent to us. Copy your map if you want to keep it.", "boundary": "For work tasks, use tools and material your organisation permits, and check the result before using it.", "scales": {"tried": ["Not tried", "Tried", "Use it"], "freq": ["Not yet", "Occasionally", "Routinely", "Not relevant to me"]}, "tools": {"q": "Which AI tools do you use?", "hint": "Tick all that apply.", "options": ["ChatGPT", "Claude", "Gemini", "Microsoft Copilot", "NotebookLM", "Another"], "none": "None yet", "none_note": "You have not started yet, which makes this easy: everything below is open to you. Start with one assistant and one real task from your week, and give the Basic round of the challenge ten minutes for the vocabulary."}, "where": {"q": "Where do you use them?", "hint": "Tick all that apply.", "options": ["Browser", "Phone app", "Desktop app", "Inside Office or Google apps"], "browser_only_note": "You only use the browser. The phone and desktop apps add other ways of working: photographing a document on the move, dictating a brief, and agents that work on the files on your machine. What is available depends on the tool and your access."}, "access": {"q": "How do you get access?", "hint": "Tick all that apply.", "options": ["Free access", "Paid personally", "Provided by work", "Not sure"], "free_only_note": "You are on free access. Start with what your current account can do: on Claude that already includes projects and creating Excel, Word and PowerPoint files. Consider paying only when a feature or a usage limit is actually holding you back."}, "features": [{"id": "projects", "name": "Projects", "note": "A workspace holding one client's documents and standing instructions, so every conversation about that client starts informed.", "links": ["C1", "G2"]}, {"id": "instructions", "name": "Custom instructions", "note": "Save preferences such as British spelling, your sign-off and your house style once, to guide every future reply.", "links": ["11", "G3"]}, {"id": "memory", "name": "Memory", "note": "The assistant carries your role, your preferences and last week's decisions into later chats, where enabled. Worth reviewing what it has remembered.", "links": ["C2", "G14", "G20"]}, {"id": "connectors", "name": "Connectors", "note": "The assistant reads permitted information from your inbox, calendar and files directly, instead of you pasting it in.", "links": ["C3", "G17", "20"]}, {"id": "skills", "name": "Skills", "note": "A saved way of doing a repeated task, such as the monthly client report, written once and reused.", "links": ["C4", "G9"]}, {"id": "gpts", "name": "Custom GPTs or Gems", "note": "A configured assistant built for one job, with its own instructions and files, that you or a colleague can open and use.", "links": ["G9"], "related": true}, {"id": "files", "name": "Files out: Excel, PowerPoint, Word", "note": "Ask for a working spreadsheet with formulas or a finished deck, not text to copy and paste.", "links": ["C12", "G12"]}, {"id": "research", "name": "Deep research", "note": "A cited report across many sources on a question about the world, in minutes, with a plan you approve first.", "links": ["G7"]}, {"id": "voice", "name": "Voice: dictation and voice mode", "note": "Dictate a long brief instead of typing it, or talk a problem through in the car.", "links": ["C14"]}, {"id": "photos", "name": "Photos and screenshots", "note": "Photograph a contract page or paste a screenshot of a spreadsheet, and ask about it.", "links": ["C13", "G13"]}, {"id": "scheduled", "name": "Scheduled tasks", "note": "A Monday-morning briefing that runs on a schedule. Cloud tasks run with the laptop closed; tasks that need your local files need the app available.", "links": ["C18", "G16"]}], "agents": [{"id": "cowork", "name": "Claude Cowork", "note": "Hand over a folder and a brief; come back to renamed files, a summary spreadsheet and a cover note.", "links": ["C6"]}, {"id": "work", "name": "ChatGPT Work", "note": "The same idea in ChatGPT: a task carried through to a finished deliverable across your files and apps.", "links": ["G1"]}, {"id": "chrome", "name": "Claude in Chrome", "note": "The assistant navigates a portal, fills in the form and downloads the statement, inside your own browser.", "links": ["C10"]}, {"id": "code", "name": "Claude Code or Codex", "note": "Agents with a focus on software and technical work. An optional route for exploring scripts, tools and automation; not needed for the rest of this map.", "links": ["13"], "related": true, "optional": true}], "agents_intro": "AI that does the work rather than advising: on your files, your desktop or your browser.", "agents_all_new_note": "Agents can carry a task through several steps on their own. Start with a copy of non-confidential material, a clear brief and a result you can check.", "activities": [{"id": "email", "name": "Email drafting and replies", "note": "A first draft of every non-trivial reply in your voice, from a two-line brief.", "features": ["instructions", "connectors"], "links": ["3"], "related": true}, {"id": "calendar", "name": "Calendar and planning", "note": "\"What does my week look like, and what have I not prepared for?\" answered from your real calendar.", "features": ["connectors"], "links": ["G17", "C3"]}, {"id": "notes", "name": "Notes and files", "note": "Dictated notes tidied into actions; a folder sorted and summarised without opening each file.", "features": ["voice", "cowork"], "links": ["C14", "C6"]}, {"id": "reading", "name": "Research and reading", "note": "A 60-page prospectus uploaded and questioned rather than skimmed; a cited briefing on a sector in ten minutes.", "features": ["files_in", "research"], "links": ["C11", "G7"]}, {"id": "writing", "name": "Writing documents and presentations", "note": "The deck or the paper produced as a file, from your bullet points and your template.", "features": ["files", "projects"], "links": ["C12", "G12", "C1"]}, {"id": "numbers", "name": "Spreadsheets and numbers", "note": "A working model with formulas built from a description, or a messy export cleaned and totalled.", "features": ["files", "analysis"], "links": ["G8", "G12", "F2", "F5"]}, {"id": "meetings", "name": "Meeting prep and follow-up", "note": "The pack read and questioned before the meeting; the minutes and actions drafted after it.", "features": ["projects", "connectors"], "links": ["C1", "G2"]}, {"id": "learning", "name": "Learning and study", "note": "A tutor that explains the chapter at your level, tests you, and never tires of the same question.", "features": ["projects", "voice"], "links": ["C1", "C14"], "related": true}, {"id": "admin", "name": "Personal admin: travel, family, money", "note": "Itineraries, comparisons, letters to the landlord, the school form.", "features": ["photos", "voice"], "links": ["C13", "C14"], "related": true}, {"id": "health", "name": "Health and fitness", "note": "A training plan that adapts to your week; a food diary from photos.", "features": ["photos", "memory"], "links": ["C13", "C2"], "related": true}], "extra_features": {"files_in": "File upload", "analysis": "Data analysis", "cowork": "Claude Cowork"}, "outputs": {"q": "What have you had AI make for you?", "hint": "Tick all that apply.", "options": ["A Word document", "A PowerPoint deck", "An Excel spreadsheet", "A PDF", "A web page or small app", "Images", "Code or a script"], "exclusive": ["Only text in the chat so far", "Nothing yet"], "text_only_note": "Everything you have had so far has been text in a chat. The step change is asking for the finished file: the spreadsheet with its formulas, the deck, the document."}, "friction": {"q": "What gets in the way?", "hint": "Tick all that apply.", "options": [{"id": "makesup", "label": "It makes things up", "note": "It does, and sources help without fixing it. Give it approved material, ask for the supporting passages, and check those passages and any calculations before you use the answer.", "links": ["12", "14"]}, {"id": "whattoask", "label": "I do not know what to ask it", "note": "Start with the task, not the tool. Describe the piece of work as you would to a new colleague: the purpose, the facts it may use, and the tone.", "links": ["3"]}, {"id": "blocked", "label": "My firm blocks or limits the tools", "note": "Ask which tools and uses your firm permits rather than whether AI is allowed. While that is unresolved, practise on your own non-confidential material or public examples.", "links": ["C20"]}, {"id": "context", "label": "It does not know my context", "note": "That is what projects, custom instructions and memory are for. Set them up once and the answers change.", "links": ["C1", "C2", "11"]}, {"id": "slower", "label": "It takes longer than doing it myself", "note": "True for a one-off task the first time. Try a recurring task, save the instructions and the template, and compare the total time including the checking.", "links": ["C4"]}, {"id": "trust", "label": "I do not trust the output for client work", "note": "Right instinct. Use approved tools and material, verify claims and calculations against the sources, and keep the final judgement yourself.", "links": ["F1", "F6"]}, {"id": "none", "label": "Nothing is getting in the way", "note": null, "exclusive": true}, {"id": "notstarted", "label": "I have not started yet", "note": "Then start today with one task you would happily never do again.", "exclusive": true}, {"id": "other", "label": "Other, or prefer not to say", "note": null, "exclusive": false}]}, "course_line": "Want help putting this into practice? AI Embedded is the half-day introduction, AI Practised (Course A) the hands-on foundations, AI Applied (Course B) for recurring workflows, and AI Unleashed a personal setup session on your own machine. The specialist options go deeper.", "all_routine_note": "You already use AI across the work that applies to you. The next gain is depth: pick one workflow below you would like to run better, and look at the features you have not tried.", "nothing_applies_note": "None of the ten kinds of work applies to you, or you skipped them. Browse the examples below for ideas; nothing here is a judgement."};
+  const ROUND_NAMES = {"basic": "Basic", "working": "Working", "advanced": "Advanced", "board": "Board track", "claude": "Claude I", "claude2": "Claude II", "finance": "Finance in practice", "g1": "ChatGPT I", "g2": "ChatGPT II"};
+  const CHALLENGE = "https://mahdioneill.github.io/ai-fluency/challenge/";
+  const SITE = "https://mahdioneill.github.io/ai-fluency/";
+  const $ = s => document.querySelector(s);
+  const app = $('#app');
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const toast = m => { const t = $('#toast'); t.textContent = m; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 1800); };
+  const NAMES = {}; C.features.forEach(f => NAMES[f.id] = f.name); C.agents.forEach(a => NAMES[a.id] = a.name); Object.assign(NAMES, C.extra_features);
+  function roundOf(q){ if (/^\d+$/.test(q)) { const n = +q; return n <= 10 ? 'basic' : n <= 20 ? 'working' : 'advanced'; } if (q[0]==='B') return 'board'; if (q[0]==='F') return 'finance'; const n = +q.slice(1); if (q[0]==='C') return n <= 10 ? 'claude' : 'claude2'; return n <= 10 ? 'g1' : 'g2'; }
+  function qlink(q, related){ return '<a href="' + CHALLENGE + '#q=' + q + '" target="_blank" rel="noopener">' + esc(ROUND_NAMES[roundOf(q)]) + ' ' + esc(q) + '</a>' + (related ? ' (related)' : ''); }
+
+  // answers live only in this object, only while the page is open
+  let A; function reset(){ A = { tools: new Set(), none: false, where: new Set(), access: new Set(), feat: {}, agent: {}, act: {}, outputs: new Set(), outEx: null, fric: new Set(), chosen: [] }; }
+  reset();
+  const STEPS = ['tools', 'features', 'agents', 'activities', 'outputs'];
+  let step = 0;
+
+  function head(label, n){ return '<div class="step"><span class="t">' + esc(label) + '</span><span>' + (n ? 'Step ' + n + ' of 5' : 'Your map') + '</span></div><div class="progress"><i style="width:' + ((n ? n - 1 : 5) / 5 * 100) + '%"></i></div>'; }
+  function ticks(set, options, cls){ return '<div class="ticks">' + options.map(o => '<button class="tick' + (set.has(o) ? ' on' : '') + '" data-' + cls + '="' + esc(o) + '">' + esc(o) + '</button>').join('') + '</div>'; }
+  function seg(store, id, scale){ return '<div class="seg">' + scale.map((s, i) => '<button data-seg="' + id + '" data-v="' + i + '"' + (store[id] === i ? ' class="on"' : '') + '>' + esc(s) + '</button>').join('') + '</div>'; }
+  function rows(items, store, scale, optionalToggle){
+    let h = '';
+    items.forEach(it => {
+      if (it.optional && !optionalToggle) return;
+      h += '<div class="row"><div><div class="nm">' + esc(it.name) + '</div><div class="nt">' + esc(it.note) + '</div></div>' + seg(store, it.id, scale) + '</div>';
+    });
+    return h;
+  }
+  let showOptional = false;
+
+  function render(){
+    let h = '';
+    const nav = (back, nextLabel) => '<div class="btnrow">' + (back ? '<button class="btn quiet" data-back>Back</button>' : '') + '<button class="btn solid" data-next>' + nextLabel + '</button></div>';
+    if (step === 0) {
+      h += head('Tools', 1) + '<div class="q">' + esc(C.tools.q) + '</div><div class="hint">' + esc(C.tools.hint) + '</div>' + ticks(A.tools, C.tools.options, 'tool')
+        + '<div class="ticks" style="margin-top:8px"><button class="tick' + (A.none ? ' on' : '') + '" data-none>' + esc(C.tools.none) + '</button></div>';
+      if (!A.none) {
+        h += '<div class="q">' + esc(C.where.q) + '</div><div class="hint">' + esc(C.where.hint) + '</div>' + ticks(A.where, C.where.options, 'where');
+        h += '<div class="q">' + esc(C.access.q) + '</div><div class="hint">' + esc(C.access.hint) + '</div>' + ticks(A.access, C.access.options, 'access');
+      }
+      h += nav(false, 'Next');
+    } else if (step === 1) {
+      h += head('Features', 2) + '<div class="intro">Which of these have you used?</div><div class="small">' + esc(C.boundary) + ' Leave a row blank if you are not sure.</div>' + rows(C.features, A.feat, C.scales.tried) + nav(true, 'Next');
+    } else if (step === 2) {
+      h += head('Agentic tools', 3) + '<div class="intro">' + esc(C.agents_intro) + '</div>' + rows(C.agents, A.agent, C.scales.tried, showOptional)
+        + '<button class="optional-toggle" data-optional>' + (showOptional ? 'Hide the developer tools' : 'Show the developer tools (optional)') + '</button>' + nav(true, 'Next');
+    } else if (step === 3) {
+      h += head('What you use AI for', 4) + '<div class="intro">How often do you use AI for each of these?</div><div class="small">Routinely means whenever it is relevant, even if that is monthly. Not relevant means it is not part of your life or work.</div>' + rows(C.activities, A.act, C.scales.freq) + nav(true, 'Next');
+    } else if (step === 4) {
+      h += head('Outputs and friction', 5) + '<div class="q">' + esc(C.outputs.q) + '</div><div class="hint">' + esc(C.outputs.hint) + '</div>' + ticks(A.outputs, C.outputs.options, 'out')
+        + '<div class="ticks" style="margin-top:8px">' + C.outputs.exclusive.map(o => '<button class="tick' + (A.outEx === o ? ' on' : '') + '" data-outex="' + esc(o) + '">' + esc(o) + '</button>').join('') + '</div>';
+      h += '<div class="q">' + esc(C.friction.q) + '</div><div class="hint">' + esc(C.friction.hint) + '</div><div class="ticks">' + C.friction.options.map(o => '<button class="tick' + (A.fric.has(o.id) ? ' on' : '') + '" data-fric="' + o.id + '">' + esc(o.label) + '</button>').join('') + '</div>';
+      h += nav(true, 'See my map');
+    } else {
+      h += result();
+    }
+    app.innerHTML = h;
+    bind();
+    window.scrollTo(0, 0);
+  }
+
+  function bind(){
+    app.querySelectorAll('[data-tool]').forEach(b => b.addEventListener('click', () => { const v = b.dataset.tool; A.tools.has(v) ? A.tools.delete(v) : A.tools.add(v); A.none = false; render(); }));
+    const none = app.querySelector('[data-none]'); if (none) none.addEventListener('click', () => { A.none = !A.none; if (A.none) { A.tools.clear(); A.where.clear(); A.access.clear(); } render(); });
+    app.querySelectorAll('[data-where]').forEach(b => b.addEventListener('click', () => { const v = b.dataset.where; A.where.has(v) ? A.where.delete(v) : A.where.add(v); render(); }));
+    app.querySelectorAll('[data-access]').forEach(b => b.addEventListener('click', () => { const v = b.dataset.access; A.access.has(v) ? A.access.delete(v) : A.access.add(v); render(); }));
+    app.querySelectorAll('[data-seg]').forEach(b => b.addEventListener('click', () => {
+      const id = b.dataset.seg, v = +b.dataset.v; const store = step === 1 ? A.feat : step === 2 ? A.agent : A.act;
+      store[id] = (store[id] === v) ? undefined : v; render();
+    }));
+    const opt = app.querySelector('[data-optional]'); if (opt) opt.addEventListener('click', () => { showOptional = !showOptional; render(); });
+    app.querySelectorAll('[data-out]').forEach(b => b.addEventListener('click', () => { const v = b.dataset.out; A.outputs.has(v) ? A.outputs.delete(v) : A.outputs.add(v); A.outEx = null; render(); }));
+    app.querySelectorAll('[data-outex]').forEach(b => b.addEventListener('click', () => { const v = b.dataset.outex; A.outEx = (A.outEx === v) ? null : v; if (A.outEx) A.outputs.clear(); render(); }));
+    app.querySelectorAll('[data-fric]').forEach(b => b.addEventListener('click', () => {
+      const id = b.dataset.fric; const o = C.friction.options.find(x => x.id === id);
+      if (A.fric.has(id)) A.fric.delete(id); else { if (o.exclusive) A.fric.clear(); else C.friction.options.filter(x => x.exclusive).forEach(x => A.fric.delete(x.id)); A.fric.add(id); }
+      render();
+    }));
+    const nx = app.querySelector('[data-next]'); if (nx) nx.addEventListener('click', () => { step++; render(); });
+    const bk = app.querySelector('[data-back]'); if (bk) bk.addEventListener('click', () => { step--; render(); });
+    const rt = app.querySelector('[data-retake]'); if (rt) rt.addEventListener('click', () => { reset(); step = 0; showOptional = false; render(); });
+    app.querySelectorAll('[data-pick]').forEach(b => b.addEventListener('click', () => {
+      const id = b.dataset.pick; const i = A.chosen.indexOf(id);
+      if (i >= 0) A.chosen.splice(i, 1); else if (A.chosen.length < 3) A.chosen.push(id); else { toast('Three is the limit. Unpick one first.'); return; }
+      render(); window.scrollTo(0, 0);
+    }));
+    const more = app.querySelector('[data-more]'); if (more) more.addEventListener('click', () => { showMore = !showMore; render(); });
+    const cp = app.querySelector('[data-copy]'); if (cp) cp.addEventListener('click', () => {
+      const txt = mapText();
+      const fallback = () => { const box = $('#copybox'); box.value = txt; box.classList.add('show'); box.focus(); box.select(); toast('Select and copy the text below'); };
+      let p = null; try { p = navigator.clipboard && navigator.clipboard.writeText ? navigator.clipboard.writeText(txt) : null; } catch (e) { p = null; }
+      if (p && p.then) p.then(() => toast('Copied'), fallback); else fallback();
+    });
+    app.querySelectorAll('.chip').forEach(b => b.addEventListener('click', () => {
+      const box = $('#chipnote'); const key = b.dataset.chip; const it = C.features.concat(C.agents).find(x => x.id === key);
+      app.querySelectorAll('.chip').forEach(x => x.classList.remove('open'));
+      if (box.dataset.open === key) { box.dataset.open = ''; box.classList.remove('show'); return; }
+      box.dataset.open = key; b.classList.add('open'); box.innerHTML = '<b>' + esc(it.name) + '</b>: ' + esc(it.note) + ' ' + it.links.map(q => qlink(q, it.related)).join(' · '); box.classList.add('show');
+    }));
+  }
+  let showMore = false;
+
+  // ---- result logic
+  function allRoutine(){ const ap = applicable(); return ap.length > 0 && ap.every(a => A.act[a.id] === 2); }
+  function ideas(){ const picked = C.activities.filter(a => A.act[a.id] === 0 || A.act[a.id] === 1); if (applicable().length === 0) return C.activities.slice(); if (allRoutine()) return applicable(); return picked; }
+  function applicable(){ return C.activities.filter(a => A.act[a.id] !== undefined && A.act[a.id] !== 3); }
+  function notTried(){ return C.features.concat(C.agents).filter(x => A.feat[x.id] === 0 || A.agent[x.id] === 0); }
+  function recommendedRound(){
+    const pool = (A.chosen.length ? C.activities.filter(a => A.chosen.includes(a.id)) : ideas()).concat(notTried());
+    const counts = {}; pool.forEach(it => it.links.forEach(q => { const r = roundOf(q); counts[r] = (counts[r] || 0) + 1; }));
+    const order = Object.keys(ROUND_NAMES); let best = null;
+    order.forEach(r => { if (counts[r] && (best === null || counts[r] > counts[best])) best = r; });
+    return best || 'basic';
+  }
+  function summary(){
+    const ap = applicable(); const routine = ap.filter(a => A.act[a.id] === 2).length, occ = ap.filter(a => A.act[a.id] === 1).length, notyet = ap.filter(a => A.act[a.id] === 0).length;
+    const fAns = C.features.filter(f => A.feat[f.id] !== undefined); const use = fAns.filter(f => A.feat[f.id] === 2).length, tried = fAns.filter(f => A.feat[f.id] === 1).length;
+    if (A.none) return C.tools.none_note;
+    if (!ap.length) return C.nothing_applies_note;
+    let s = 'Of the ' + ap.length + ' kinds of work that apply to you, you use AI routinely for ' + routine + ', occasionally for ' + occ + ' and not yet for ' + notyet + '.';
+    if (fAns.length) s += ' You use ' + use + ' of the ' + fAns.length + ' features you answered on' + (tried ? ', and have tried ' + tried + ' more' : '') + '.';
+    if (ap.length && notyet === 0 && occ === 0) s += ' ' + C.all_routine_note;
+    return s;
+  }
+  function ideaCard(a, chosen){
+    return '<div class="idea' + (chosen ? ' chosen' : '') + '" data-pick="' + a.id + '"><div class="nm">' + esc(a.name) + '</div><div class="ex">' + esc(a.note) + '</div>'
+      + '<div class="ft">Features that can help: ' + a.features.map(f => esc(NAMES[f])).join(', ') + ' · ' + a.links.slice(0, 1).map(q => qlink(q, a.related)).join('') + '</div>'
+      + '<div class="pick">' + (chosen ? 'Chosen · tap to unpick' : 'Tap to choose') + '</div></div>';
+  }
+  function result(){
+    let h = head(C.result_title, 0) + '<div class="lead">' + esc(summary()) + '</div>';
+    const id = ideas(); const chosen = id.filter(a => A.chosen.includes(a.id)); const rest = id.filter(a => !A.chosen.includes(a.id));
+    if (id.length) {
+      h += '<div class="section-label">' + (chosen.length ? 'Your ' + (chosen.length === 1 ? 'idea' : chosen.length + ' ideas') : (allRoutine() ? 'Workflows you could run better · pick up to three' : applicable().length ? 'Ideas you could try · pick up to three that would help most' : 'Ideas to browse · pick up to three that appeal')) + '</div>';
+      chosen.forEach(a => h += ideaCard(a, true));
+      if (chosen.length) h += '<div class="section-label">More ideas</div>';
+      const visible = (chosen.length || showMore) ? rest : rest.slice(0, 3);
+      visible.forEach(a => h += ideaCard(a, false));
+      if (!chosen.length && !showMore && rest.length > 3) h += '<button class="more" data-more>See ' + (rest.length - 3) + ' more</button>';
+    }
+    const nt = notTried();
+    if (nt.length) {
+      h += '<div class="section-label">Features you have not tried · tap any for a line on it</div><div class="chips">' + nt.map(x => '<button class="chip" data-chip="' + x.id + '">' + esc(x.name) + '</button>').join('') + '</div><div class="chip-note" id="chipnote"></div>';
+      if (C.agents.filter(a => !a.optional).every(a => A.agent[a.id] === 0)) h += '<div class="note">' + esc(C.agents_all_new_note) + '</div>';
+    }
+    const fr = C.friction.options.filter(o => A.fric.has(o.id) && o.note);
+    const extra = [];
+    if (A.outEx === C.outputs.exclusive[0]) extra.push(C.outputs.text_only_note);
+    if (!A.none && A.where.size && [...A.where].every(w => w === 'Browser')) extra.push(C.where.browser_only_note);
+    if (!A.none && A.access.size && [...A.access].every(w => w === 'Free access')) extra.push(C.access.free_only_note);
+    if (fr.length || extra.length) {
+      h += '<div class="section-label">What gets in the way</div>';
+      fr.forEach(o => h += '<div class="note"><b>' + esc(o.label) + '</b>: ' + esc(o.note) + (o.links ? ' ' + o.links.map(q => qlink(q)).join(' · ') : '') + '</div>');
+      extra.forEach(n => h += '<div class="note">' + esc(n) + '</div>');
+    }
+    h += '<div class="section-label">Next</div><div class="small">' + esc(C.course_line) + ' <a href="' + SITE + '" target="_blank" rel="noopener">See the course outlines</a>.</div>';
+    const r = recommendedRound();
+    h += '<div class="btnrow"><button class="btn solid" data-copy>Copy my map</button><a class="btn" href="' + CHALLENGE + '#' + r + '" target="_blank" rel="noopener">Try the ' + esc(ROUND_NAMES[r]) + ' round</a><button class="btn quiet" data-retake>Retake</button></div>'
+      + '<textarea class="copybox" id="copybox" readonly></textarea><div class="small" style="margin-top:14px">' + esc(C.privacy) + '</div>';
+    return h;
+  }
+  function mapText(){
+    const lines = ['Where are you with AI? My opportunity map', ''];
+    lines.push(summary(), '');
+    const id = ideas(); const chosen = id.filter(a => A.chosen.includes(a.id));
+    if (chosen.length) { lines.push('My ' + chosen.length + ' ideas:'); chosen.forEach(a => lines.push('- ' + a.name + ': ' + a.note + ' (' + a.features.map(f => NAMES[f]).join(', ') + ')')); lines.push(''); }
+    const more = id.filter(a => !A.chosen.includes(a.id)); if (more.length) { lines.push('Other ideas: ' + more.map(a => a.name).join('; '), ''); }
+    const nt = notTried(); if (nt.length) { lines.push('Features I have not tried: ' + nt.map(x => x.name).join(', '), ''); }
+    C.friction.options.filter(o => A.fric.has(o.id) && o.note).forEach(o => lines.push(o.label + ': ' + o.note));
+    lines.push('', 'Challenge round to try: ' + ROUND_NAMES[recommendedRound()] + ' at ' + CHALLENGE, SITE);
+    return lines.join('\n');
+  }
+  render();
+})();
+</script>
+</body>
+</html>

@@ -112,7 +112,7 @@
 <div class="header"><div class="eyebrow"><a href="https://mahdioneill.github.io/ai-fluency/" style="color:inherit;text-decoration:none">Patrick Mahdi O’Neill · AI Fluency Training · Dubai</a></div><div class="title">How well do you <em>know AI</em>?</div><div class="tagline">The AI Knowledge Challenge: the terms behind AI at work, from the basics to the boardroom, every answer explained.</div></div>
 <div class="crumbs" id="crumbs"></div>
 <div id="app"></div>
-<div class="foot">Patrick Mahdi O’Neill · <a href="https://mahdioneill.github.io/ai-fluency/" target="_blank" rel="noopener">AI fluency training for finance professionals</a> · <a href="#" id="reset">Clear my progress</a></div>
+<div class="foot">Patrick Mahdi O’Neill · <a href="https://mahdioneill.github.io/ai-fluency/" target="_blank" rel="noopener">AI fluency training for finance professionals</a> · <a href="https://mahdioneill.github.io/ai-fluency/diagnostic/">Where are you with AI?</a> · <a href="#" id="reset">Clear my progress</a></div>
 </div>
 <div class="toast" id="toast"></div>
 <script>
@@ -256,7 +256,9 @@
     $('[data-home]').addEventListener('click', () => go('#'));
     $('[data-share]').addEventListener('click', () => {
       const txt = 'AI Knowledge Challenge: ' + n + '/' + total + (t ? ' on the ' + t.title + ' round' : ' on the quick draw') + '. ' + location.origin + location.pathname;
-      (navigator.clipboard ? navigator.clipboard.writeText(txt) : Promise.reject()).then(() => toast('Copied'), () => { prompt('Copy your result:', txt); });
+      const fallback = () => { prompt('Copy your result:', txt); };
+      let p = null; try { p = navigator.clipboard && navigator.clipboard.writeText ? navigator.clipboard.writeText(txt) : null; } catch (e) { p = null; }
+      if (p && p.then) p.then(() => toast('Copied'), fallback); else fallback();
     });
     let openT = null;
     app.querySelectorAll('.term').forEach(b => b.addEventListener('click', () => {
