@@ -248,7 +248,7 @@
       if (n >= PASS && next) h += '<button class="btn solid" data-start="' + next.id + '">Start ' + esc(next.title) + '</button>';
       h += '<button class="btn" data-start="' + t.id + '">Retake ' + esc(t.title) + '</button>';
     } else h += '<button class="btn solid" data-quick>Another ten</button>';
-    h += '<button class="btn quiet" data-share>Copy my result</button><button class="btn quiet" data-notes title="Score, every term with its note, and the questions you missed: paste into a notebook or an assistant">Copy my notes</button><a class="btn quiet" target="_blank" rel="noopener" href="https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(location.origin + location.pathname) + '">Share on LinkedIn</a>'
+    h += '<button class="btn" data-notes title="Every question with the correct answer, what you chose, and the note on all four options, plus the terms: paste into a notebook or an assistant">Copy the full round</button><button class="btn quiet" data-share title="One line with your score and a link">Copy my score</button><a class="btn quiet" target="_blank" rel="noopener" href="https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(location.origin + location.pathname) + '">Share on LinkedIn</a>'
        + '<button class="btn quiet" data-home>All rounds</button></div>';
     h += '<div class="section-label">The ' + terms.length + ' terms in this round · tap any to re-read its note</div><div class="terms">';
     terms.forEach((o, j) => { h += '<button class="term" data-t="' + j + '">' + esc(o.term) + '</button>'; });
@@ -258,18 +258,25 @@
     const qk = $('[data-quick]'); if (qk) qk.addEventListener('click', () => start('quick'));
     $('[data-home]').addEventListener('click', () => go('#'));
     $('[data-notes]').addEventListener('click', () => {
-      const L = ['AI Knowledge Challenge · ' + (t ? t.title + ' round' : 'Quick draw') + ' · ' + n + '/' + total, ''];
-      const missed = S.qs.map((q, i) => ({q, a: S.answers[i]})).filter(x => x.a && !x.a.ok);
-      L.push('Questions I missed (' + missed.length + '):');
-      if (!missed.length) L.push('- none');
-      missed.forEach(({q, a}) => { const c = q.options.find(o => o.correct); const ch = q.options[a.chosen]; L.push('- ' + q.stem); L.push('  Correct: ' + c.term + ' — ' + c.note); L.push('  I chose: ' + ch.term + ' — ' + ch.note); });
-      L.push('', 'All terms in this round:');
-      S.qs.forEach(q => q.options.forEach(o => L.push('- ' + (o.gloss || o.term) + ': ' + o.note)));
-      L.push('', location.origin + location.pathname + (t ? '#' + t.id : '#quick'));
+      const L = ['AI Knowledge Challenge · ' + (t ? t.title + ' round' : 'Quick draw') + ' · my score ' + n + '/' + total,
+                 'Patrick Mahdi O’Neill · ' + location.origin + location.pathname + (t ? '#' + t.id : '#quick'), ''];
+      S.qs.forEach((q, i) => {
+        const a = S.answers[i]; const c = q.options.find(o => o.correct); const ch = a ? q.options[a.chosen] : null;
+        L.push('Q' + (i + 1) + '. ' + q.stem);
+        L.push('  Correct answer: ' + c.term + ' — ' + c.note);
+        if (ch && ch !== c) L.push('  I chose: ' + ch.term + ' — ' + ch.note); else if (ch) L.push('  I got this right.');
+        q.options.filter(o => o !== c && o !== ch).forEach(o => L.push('  Also offered: ' + o.term + ' — ' + o.note));
+        L.push('');
+      });
+      const seen = {}; const glossary = [];
+      S.qs.forEach(q => q.options.forEach(o => { const k = o.gloss || o.term; if (!seen[k]) { seen[k] = 1; glossary.push(k + ': ' + o.note); } }));
+      glossary.sort((x, y) => x.localeCompare(y));
+      L.push('The ' + glossary.length + ' terms in this round, A to Z:');
+      glossary.forEach(g => L.push('- ' + g));
       const txt = L.join('\n');
-      const fallback = () => { prompt('Copy your notes:', txt); };
+      const fallback = () => { prompt('Copy the full round:', txt); };
       let p = null; try { p = navigator.clipboard && navigator.clipboard.writeText ? navigator.clipboard.writeText(txt) : null; } catch (e) { p = null; }
-      if (p && p.then) p.then(() => toast('Copied · paste into a notebook or an assistant'), fallback); else fallback();
+      if (p && p.then) p.then(() => toast('Copied the full round · paste into a notebook or an assistant'), fallback); else fallback();
     });
     $('[data-share]').addEventListener('click', () => {
       const txt = 'AI Knowledge Challenge: ' + n + '/' + total + (t ? ' on the ' + t.title + ' round' : ' on the quick draw') + '. ' + location.origin + location.pathname;
