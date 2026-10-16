@@ -568,7 +568,8 @@
           btn.classList.add('active'); pane.classList.add('active');
         }
         var g = btn.closest('.nav-group'); if (g) g.classList.remove('collapsed');
-        backRow.hidden = (key === 'about');
+        // About is the landing tab: Back shows there only when it was opened from elsewhere on the page.
+        backRow.hidden = (key === 'about' && !(history.state && history.state.site));
         if (scroll === 'top' && changed) window.scrollTo({top: 0});
         if (scroll === 'pane') {
           var t = backRow.hidden ? pane : backRow;
