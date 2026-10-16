@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI Knowledge Challenge — Patrick Mahdi O’Neill</title>
-<meta name="description" content="How well do you know AI? Nine rounds of ten questions on the terms behind AI at work, from the basics to the boardroom. Every answer explained.">
+<meta name="description" content="How well do you know AI? Nine rounds of ten multiple-choice questions on the terms behind AI at work, from the basics to the boardroom. Every answer explained.">
 <meta property="og:title" content="How well do you know AI? The AI Knowledge Challenge">
-<meta property="og:description" content="Nine rounds of ten questions on the terms behind AI at work, from the basics to the boardroom. Every answer explained.">
+<meta property="og:description" content="Nine rounds of ten multiple-choice questions on the terms behind AI at work, from the basics to the boardroom. Every answer explained.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://mahdioneill.github.io/ai-fluency/challenge/">
 <meta property="og:image" content="https://mahdioneill.github.io/ai-fluency/challenge/og-image.png">
@@ -34,6 +34,7 @@
   .crumbs a { color: var(--muted); text-decoration: none; cursor: pointer; }
   .crumbs a:hover { color: var(--gold); }
   .section-label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin: 28px 0 14px; padding-bottom: 8px; border-bottom: 1px solid var(--rule); }
+  .meta { font-family: 'DM Mono', monospace; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
   .intro { font-family: 'Cormorant Garamond', serif; font-size: 19px; line-height: 1.5; margin-bottom: 20px; max-width: 640px; }
   .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .card { border-top: 2.5px solid var(--ink); border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); border-left: 1px solid var(--rule); padding: 16px 16px 18px; background: var(--cream); cursor: pointer; text-align: left; font-family: inherit; color: inherit; position: relative; }
@@ -108,10 +109,16 @@
     .stem { font-size: 21px; }
     .score { font-size: 54px; }
   }
+
+  .site-back { display: inline-block; font-family: 'DM Mono', monospace; font-size: 10.5px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--muted); text-decoration: none; padding: 4px 0 12px; }
+  .site-back:hover, .site-back:focus-visible { color: var(--gold); }
+  @media print { .site-back { display: none; } }
 </style>
 </head>
 <body>
 <div class="wrap">
+<a class="site-back" id="site-back" href="../#know" aria-label="Back to the previous page"><span aria-hidden="true">&larr;</span> Back</a>
 <div class="header"><div><div class="eyebrow"><a href="https://mahdioneill.github.io/ai-fluency/" style="color:inherit;text-decoration:none">Patrick Mahdi O’Neill · AI Fluency Training · Dubai</a></div><div class="title">How well do you <em>know AI</em>?</div><div class="tagline">The AI Knowledge Challenge: the terms behind AI at work, from the basics to the boardroom, every answer explained.</div></div><img class="hero-img" src="hero.webp" width="1000" height="764" alt="A brass jigsaw of finance objects on a navy background: coins, a calculator and a fountain pen, with the final piece, made of glowing gold light, being placed." fetchpriority="high" decoding="async"></div>
 <div class="crumbs" id="crumbs"></div>
 <div id="app"></div>
@@ -144,7 +151,7 @@
   let S = null; // session: {mode, trackId, qs, i, answers:[{qid, chosen, ok}]}
 
   function home(){
-    let h = '<div class="intro">Nine rounds of ten questions. Every option is a real term, so a wrong answer teaches as much as a right one. Nothing is stored anywhere but your own browser.</div>';
+    let h = '<div class="meta">' + DATA.length + ' rounds · 10 multiple-choice questions per round</div><div class="intro">Every option is a real term, so a wrong answer teaches as much as a right one. Nothing is stored anywhere but your own browser.</div>';
     h += '<div class="section-label">Course mode · pass a level at ' + PASS + ' of 10 to unlock the next</div><div class="grid">';
     DATA.filter(t => t.requires !== undefined && ['basic','working','advanced'].includes(t.id)).forEach(t => {
       const lock = !unlocked(t); const b = best(t.id);
@@ -248,9 +255,9 @@
       if (n >= PASS && next) h += '<button class="btn solid" data-start="' + next.id + '">Start ' + esc(next.title) + '</button>';
       h += '<button class="btn" data-start="' + t.id + '">Retake ' + esc(t.title) + '</button>';
     } else h += '<button class="btn solid" data-quick>Another ten</button>';
-    h += '<button class="btn" data-notes title="Every question with the correct answer, what you chose, and the note on all four options, plus the terms: paste into a notebook or an assistant">Copy the full round</button><button class="btn quiet" data-share title="One line with your score and a link">Copy my score</button><a class="btn quiet" target="_blank" rel="noopener" href="https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(location.origin + location.pathname) + '">Share on LinkedIn</a>'
-       + '<button class="btn quiet" data-home>All rounds</button></div>';
-    h += '<div class="section-label">The ' + terms.length + ' terms in this round · tap any to re-read its note</div><div class="terms">';
+    h += '<button class="btn" data-notes title="Your score, every question with the correct answer, what you chose and the note on all four options, plus the terms: paste into a notebook or an assistant">Copy my results</button><a class="btn" target="_blank" rel="noopener" href="https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(location.origin + location.pathname) + '">Share on LinkedIn</a>'
+       + '<button class="btn quiet" data-home>Choose another round</button></div>';
+    h += '<div class="section-label">The ' + terms.length + ' terms in this ' + (t ? 'round' : 'draw') + ' · tap any to re-read its note</div><div class="terms">';
     terms.forEach((o, j) => { h += '<button class="term" data-t="' + j + '">' + esc(o.term) + '</button>'; });
     h += '</div><div class="term-note" id="tnote"></div>';
     app.innerHTML = h;
@@ -271,18 +278,12 @@
       const seen = {}; const glossary = [];
       S.qs.forEach(q => q.options.forEach(o => { const k = o.gloss || o.term; if (!seen[k]) { seen[k] = 1; glossary.push(k + ': ' + o.note); } }));
       glossary.sort((x, y) => x.localeCompare(y));
-      L.push('The ' + glossary.length + ' terms in this round, A to Z:');
+      L.push('The ' + glossary.length + ' terms in this ' + (t ? 'round' : 'draw') + ', A to Z:');
       glossary.forEach(g => L.push('- ' + g));
       const txt = L.join('\n');
-      const fallback = () => { prompt('Copy the full round:', txt); };
+      const fallback = () => { prompt('Copy your results:', txt); };
       let p = null; try { p = navigator.clipboard && navigator.clipboard.writeText ? navigator.clipboard.writeText(txt) : null; } catch (e) { p = null; }
-      if (p && p.then) p.then(() => toast('Copied the full round · paste into a notebook or an assistant'), fallback); else fallback();
-    });
-    $('[data-share]').addEventListener('click', () => {
-      const txt = 'AI Knowledge Challenge: ' + n + '/' + total + (t ? ' on the ' + t.title + ' round' : ' on the quick draw') + '. ' + location.origin + location.pathname;
-      const fallback = () => { prompt('Copy your result:', txt); };
-      let p = null; try { p = navigator.clipboard && navigator.clipboard.writeText ? navigator.clipboard.writeText(txt) : null; } catch (e) { p = null; }
-      if (p && p.then) p.then(() => toast('Copied'), fallback); else fallback();
+      if (p && p.then) p.then(() => toast('Copied your results · paste into a notebook or an assistant'), fallback); else fallback();
     });
     let openT = null;
     app.querySelectorAll('.term').forEach(b => b.addEventListener('click', () => {
@@ -330,6 +331,20 @@
   window.addEventListener('hashchange', route);
   $('#reset').addEventListener('click', e => { e.preventDefault(); if (confirm('Clear your saved progress on this device?')) { try { localStorage.removeItem(KEY); } catch(x){} toast('Progress cleared'); go('#'); home(); } });
   route();
+})();
+</script>
+<script>
+(function(){
+  var a = document.getElementById('site-back'); if (!a) return;
+  a.addEventListener('click', function(e){
+    if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    var root = new URL(a.getAttribute('href'), location.href).pathname, same = false;
+    try {
+      var u = new URL(document.referrer);
+      same = u.origin === location.origin && u.pathname.indexOf(root) === 0 && u.pathname !== location.pathname;
+    } catch (x) {}
+    if (same && history.length > 1) { e.preventDefault(); history.back(); }
+  });
 })();
 </script>
 </body>
