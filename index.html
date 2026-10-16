@@ -555,18 +555,25 @@
       });
       var mq = window.matchMedia('(max-width: 640px)');
       var backRow = document.getElementById('site-back-row');
-      function activate(key, toTop){
+      // scroll: 'top' = page top when the tab changes; 'pane' = bring the opened tab's content into view
+      // (the menu is taller than many laptop screens, so the content would otherwise sit out of sight below it).
+      function activate(key, scroll){
         var btn = document.querySelector('.tab-btn[data-tab="' + key + '"]');
         var pane = document.getElementById('pane-' + key);
         if (!btn || !pane) return false;
-        if (!btn.classList.contains('active')) {
+        var changed = !btn.classList.contains('active');
+        if (changed) {
           document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
           document.querySelectorAll('.tab-pane').forEach(function(p){ p.classList.remove('active'); });
           btn.classList.add('active'); pane.classList.add('active');
-          if (toTop) window.scrollTo({top: 0});
         }
         var g = btn.closest('.nav-group'); if (g) g.classList.remove('collapsed');
         backRow.hidden = (key === 'about');
+        if (scroll === 'top' && changed) window.scrollTo({top: 0});
+        if (scroll === 'pane') {
+          var t = backRow.hidden ? pane : backRow;
+          window.scrollTo({top: Math.max(0, t.getBoundingClientRect().top + window.scrollY - 8)});
+        }
         return true;
       }
       // Each tab or section opened from inside the page gets its own history entry marked {site: 1},
@@ -575,8 +582,8 @@
       function route(fromHistory){
         lastHash = location.hash;
         var h = decodeURIComponent(location.hash.slice(1));
-        if (!h) activate('about', true);
-        else if (!activate(h, true)) {
+        if (!h) activate('about', 'top');
+        else if (!activate(h, 'pane')) {
           var i = h.indexOf('-');
           if (i > 0 && activate(h.slice(0, i), false)) {
             var el = document.getElementById(h);
