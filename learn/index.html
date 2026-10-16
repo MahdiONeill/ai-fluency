@@ -211,6 +211,7 @@
 <p>If you prefer a structured approach, <a href="https://mahdioneill.github.io/ai-fluency/" target="_blank" rel="noopener">the courses on this site</a> use examples from professional practice.</p></main>
 <div class="checked">Product details checked: 7 October 2026</div>
 <div class="foot">Patrick Mahdi O’Neill · <a href="https://mahdioneill.github.io/ai-fluency/">AI fluency training for finance professionals</a> · <a href="https://mahdioneill.github.io/ai-fluency/challenge/">The AI Knowledge Challenge</a> · <a href="https://mahdioneill.github.io/ai-fluency/diagnostic/">Where are you with AI?</a> · <a href="mailto:pmahdi.ifei@gmail.com">Get in touch</a></div>
+<div id="endpad" aria-hidden="true"></div>
 </div>
 <div class="toast" id="toast"></div>
 <script>
@@ -238,6 +239,15 @@
   window.addEventListener('hashchange', () => openFor(location.hash));
   openFor(location.hash);
   window.addEventListener('beforeprint', () => document.querySelectorAll('details').forEach(d => d.open = true));
+  // Blank space after the footer, just enough for a link to the last section (#signs) to bring its heading to the top.
+  const last = document.getElementById('signs'), pad = document.getElementById('endpad');
+  const fit = () => {
+    const below = document.documentElement.scrollHeight - pad.offsetHeight - (last.getBoundingClientRect().top + scrollY);
+    pad.style.height = Math.max(0, Math.ceil(innerHeight - 14 - below)) + 'px';
+  };
+  fit(); window.addEventListener('resize', fit); window.addEventListener('load', fit);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+  if (location.hash === '#signs') last.scrollIntoView();
 })();
 </script>
 <script>
