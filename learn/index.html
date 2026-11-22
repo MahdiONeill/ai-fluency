@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script>document.documentElement.classList.add('js')</script>
 <title>How to learn AI — Patrick Mahdi O’Neill</title>
-<meta name="description" content="A practical guide to learning AI for work: 3 questions to ask, the 2 ideas that matter most, a 50-minute weekly routine and prompts to copy.">
+<meta name="description" content="A practical guide to learning AI for work: the 1 habit to build, the 2 ideas that matter most, a 50-minute weekly routine and prompts to copy.">
 <meta property="og:title" content="How to learn AI: a practical guide for finance professionals">
-<meta property="og:description" content="A practical guide to learning AI for work: 3 questions to ask, the 2 ideas that matter most, a 50-minute weekly routine and prompts to copy.">
+<meta property="og:description" content="A practical guide to learning AI for work: the 1 habit to build, the 2 ideas that matter most, a 50-minute weekly routine and prompts to copy.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://mahdioneill.github.io/ai-fluency/learn/">
 <meta property="og:image" content="https://mahdioneill.github.io/ai-fluency/learn/og-image.png">
@@ -28,14 +28,25 @@
   .tagline { font-family: 'Cormorant Garamond', serif; font-size: 19px; color: var(--ink); margin-top: 12px; max-width: 620px; line-height: 1.45; }
   .nav { display: flex; flex-wrap: wrap; gap: 0 18px; margin: 10px 0 -8px; font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
   .nav a { color: var(--muted); text-decoration: none; padding: 10px 0; }
-  .hero { display: grid; grid-template-columns: minmax(0, 1fr) 170px; gap: 34px; align-items: center; margin: 26px 0 8px; }
-  .hero img { display: block; width: 100%; height: auto; border-radius: 10px; }
-  .hero .kick { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 300; font-style: italic; line-height: 1.05; color: var(--gold-text); letter-spacing: -0.01em; margin: 0 0 14px; }
-  .hero ol { list-style: none; margin: 0; max-width: none; counter-reset: q; }
-  .hero li { counter-increment: q; position: relative; padding: 9px 0 9px 44px; margin: 0; border-top: 1px solid var(--rule); font-family: 'Cormorant Garamond', serif; font-size: 23px; font-weight: 600; line-height: 1.2; color: var(--ink); }
-  .hero li:last-child { border-bottom: 1px solid var(--rule); }
-  .hero li::before { content: counter(q); position: absolute; left: 4px; top: 3px; font-size: 34px; font-weight: 300; color: var(--gold); }
-  .hero .note { font-size: 14px; line-height: 1.55; color: var(--muted); margin: 12px 0 0; }
+  .hero { margin: 26px 0 8px; }
+  .hero .kick { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 300; font-style: italic; line-height: 1.08; color: var(--gold-text); letter-spacing: -0.01em; margin: 0 0 12px; max-width: none; }
+  .hero .lead { font-family: 'Cormorant Garamond', serif; font-size: 25px; font-weight: 600; line-height: 1.25; color: var(--ink); margin: 0 0 16px; max-width: none; }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) 200px; gap: 32px; align-items: center; }
+  .stack { display: flex; flex-direction: column; align-items: center; gap: 4px; margin-bottom: 13px; }
+  .stack .blk { box-sizing: border-box; text-align: center; font-family: 'DM Mono', monospace; font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.3; padding: 13px 6px; }
+  .stack .top { width: 76%; background: var(--cream-dark); color: var(--ink); border: 1px dashed var(--muted); }
+  .stack .ai { width: 84%; background: var(--gold); color: var(--ink-deep); font-weight: 500; }
+  .stack .cl { width: 92%; background: #4a5876; color: var(--cream); }
+  .stack .lang { width: 100%; background: var(--ink); color: var(--cream); }
+  .stack .cap { font-family: 'DM Mono', monospace; font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 6px; text-align: center; }
+  .hero .why { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-style: italic; line-height: 1.1; color: var(--gold-text); margin: 6px 0 4px; }
+  .habit { background: var(--ink); color: var(--cream); border-left: 4px solid var(--gold); padding: 20px 24px 18px; margin: 20px 0 6px; max-width: 640px; box-sizing: border-box; }
+  .habit p { max-width: none; }
+  .habit .bt { font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-light); margin: 0 0 8px; }
+  .habit .hl { font-size: 15px; margin: 0 0 8px; }
+  .habit .q { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; font-style: italic; line-height: 1.22; margin: 0; }
+  .habit .q span { display: block; }
+  .habit .note { font-size: 13.5px; line-height: 1.55; color: #d3ccbe; margin: 14px 0 0; padding-top: 11px; border-top: 1px solid rgba(247, 244, 239, 0.22); }
   .nav a:hover { color: var(--gold); }
   h2 { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 400; line-height: 1.15; margin: 38px 0 12px; padding-top: 18px; border-top: 1px solid var(--rule); }
   h2 em { font-style: italic; color: var(--gold); }
@@ -133,11 +144,13 @@
   @media (max-width: 640px) {
     .wrap { padding: 22px 16px 60px; }
     .title { font-size: 36px; }
-    .hero { grid-template-columns: 1fr; gap: 0; margin-top: 18px; }
-    .hero img { display: none; }
-    .hero .kick { font-size: 34px; }
-    .hero li { font-size: 20.5px; padding-left: 38px; }
-    .hero li::before { font-size: 30px; }
+    .hero { margin-top: 18px; }
+    .hero .kick { font-size: 32px; }
+    .hero .lead { font-size: 22px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 0; }
+    .stack { width: 230px; max-width: 100%; margin: 4px auto 18px; }
+    .habit { padding: 18px 18px 16px; }
+    .habit .q { font-size: 25px; }
     .nav a { padding: 6px 0; }
     .strip .panels { overflow-x: auto; scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch; margin-right: -16px; padding-right: 16px; }
     .strip .panels img { height: 300px; width: auto !important; flex: none !important; scroll-snap-align: start; }
@@ -159,12 +172,17 @@
 <body>
 <div class="wrap">
 <a class="site-back" id="site-back" href="../#know" aria-label="Back to the previous page"><span aria-hidden="true">&larr;</span> Back</a>
-<div class="header"><div class="eyebrow"><a href="https://mahdioneill.github.io/ai-fluency/" style="color:inherit;text-decoration:none">Patrick Mahdi O’Neill · AI Fluency Training · Dubai</a></div><h1 class="title">How to <em>learn AI</em></h1><div class="tagline">A practical guide to learning AI for work. Start with 3 questions, then build a weekly routine.</div><div class="nav"><a href="#start">3 questions</a><a href="#ideas">2 ideas</a><a href="#why">Where to start</a><a href="#routine">Routine</a><a href="#ways">Ways to learn</a><a href="#library">Prompts</a><a href="#signs">Signs</a></div></div>
-<div class="hero" id="start"><div class="hero-text"><p class="kick">Start with 3 questions</p><ol><li>Could AI do this, or part of it, better or faster than I do?</li><li>Is this use permitted, with this information?</li><li>How would I check whether the result is any good?</li></ol><p class="note">Ask them whenever a task on your computer feels slow or awkward. The rest of this page helps you act on the answers.</p></div><img src="hourglass.webp" width="900" height="1114" alt="A brass hourglass on a navy background: the last grains of sand fall from the top bulb onto the Earth below, already covered in a glowing network of light." decoding="async"></div>
-<main><h2 id="habit">Make the 3 questions a habit</h2>
-<p>Often the answer to the first question is no, and that is fine. Keep asking, because the answer changes from month to month, and the tasks worth handing over are rarely the ones you expected. Count the time spent checking and correcting as part of the task.</p>
-<p>The second half of the habit is a willingness to experiment. Start with something small: drafting a routine email, summarising a public document or formatting a practice spreadsheet. Try it, inspect the result and adjust. A poor answer may mean the instructions need work, the sources are thin, or the tool is the wrong one for the job.</p>
+<div class="header"><div class="eyebrow"><a href="https://mahdioneill.github.io/ai-fluency/" style="color:inherit;text-decoration:none">Patrick Mahdi O’Neill · AI Fluency Training · Dubai</a></div><h1 class="title">How to <em>learn AI</em></h1><div class="tagline">A practical guide to learning AI for work: 1 habit, 2 ideas and a weekly routine.</div><div class="nav"><a href="#start">Why AI</a><a href="#ideas">2 ideas</a><a href="#why">Where to start</a><a href="#routine">Routine</a><a href="#ways">Ways to learn</a><a href="#library">Prompts</a><a href="#signs">Signs</a></div></div>
+<div class="hero" id="start"><p class="kick">AI has become the new language of productivity</p><p class="lead">Most people now use AI. Very few have mastered it.</p><div class="hero-grid"><div class="hero-text"><p>Everything you know, and everything you can do, rests on a few foundations. Language came first: without it, you can learn nothing else. Computer literacy came next. Nobody hiring for an office job today expects to teach it. It is assumed.</p><p>AI fluency is the next foundation. I believe it is the most important knowledge and skill you can acquire right now.</p></div><div class="stack" role="img" aria-label="4 stacked blocks. From the base up: Language, Computer literacy, AI fluency (highlighted in gold), and Your profession on top."><div class="blk top">Your profession</div><div class="blk ai">AI fluency</div><div class="blk cl">Computer literacy</div><div class="blk lang">Language</div><div class="cap">Each rests on the one below</div></div></div><p class="why">Why?</p><p>It opens the door to everything else. Whatever you are learning, whatever skills you are building, whatever you are working on – AI can help you do it better and faster.</p><p>Those who master AI are pulling away. As AI grows more powerful and ever more prevalent, the gap between those who use it well and those who do not is only going to get wider.</p><div class="habit"><p class="bt">One crucial habit</p><p class="hl">Whenever you do anything on a computer, ask yourself:</p><p class="q"><span>Could AI do this for me?</span><span>Could it do it better?</span><span>Could it do it faster?</span></p><p class="note">Before you rely on the answer, 2 quick checks: am I allowed to use AI with this information, and how will I know the result is right?</p></div></div>
+<main><h2 id="risk">Which risk is greater?</h2>
+<p>People worry about the risks of AI: hallucination (confident answers that are wrong), slop (bland, low-quality content) and weaker critical thinking. Many also worry about its effect on the environment and on society.</p>
+<p>Organisations worry even more: leaked data, weak governance, AI agents acting beyond their remit. No wonder so many hold back.</p>
+<p>Of course, the risks are real. But the question to ask is this: which is greater, the risk of using AI or the risk of not using AI?</p>
+<p>I believe the greater risk is not using it. The answer is not to avoid AI – it is to use it well, with sensible controls.</p>
 <div class="rules"><div class="bt">Ground rules for every experiment</div><ol><li><b>Use public or fictional material, unless your organisation permits more.</b> Work on copies. A copy of a confidential document is still confidential.</li><li><b>Use the account and features your organisation has approved.</b> Approval of a product does not cover every use or connection.</li><li><b>Check the result before you use or share it,</b> and keep experiments away from live systems.</li></ol><p class="bn">These 3 rules apply to everything on this page.</p></div>
+<h2 id="habit">Make the question a habit</h2>
+<p>You do not need to be technical. You need to keep asking. Often the answer is no, and that is fine. It changes from month to month, and the tasks worth handing over are rarely the ones you expected. Count the time spent checking and correcting as part of the task.</p>
+<p>The second half of the habit is a willingness to experiment. Start with something small: drafting a routine email, summarising a public document or formatting a practice spreadsheet. Try it, inspect the result and adjust. A poor answer may mean the instructions need work, the sources are thin, or the tool is the wrong one for the job.</p>
 <h2 id="ideas">The 2 ideas that matter most</h2>
 <p>If you take only 2 ideas from this page, take these. They are the 2 I repeat to everyone who asks me about AI.</p>
 <h3 id="context">1. Context</h3>
@@ -175,7 +193,7 @@
 <figure class="strip"><div class="swipe" aria-hidden="true">Swipe to see all 3 panels &rarr;</div><div class="panels" tabindex="0" role="group" aria-label="Cartoon in 3 panels"><img src="fleet-1.webp" width="383" height="739" alt="Cartoon panel captioned Human alone. A builder sweats as he digs a small hole with a shovel." decoding="async" style="flex:383 1 0;width:0"><img src="fleet-2.webp" width="421" height="739" alt="Cartoon panel captioned Human plus AI. The same builder, smiling, drives a digger that has dug a much larger hole." decoding="async" style="flex:421 1 0;width:0"><img src="fleet-3.webp" width="841" height="739" alt="Cartoon panel captioned Human plus agentic AI. The builder holds a tablet and directs 4 diggers, which have dug the foundations of a whole site." decoding="async" style="flex:841 1 0;width:0"></div><figcaption>Same site. Same hour.</figcaption></figure>
 <p><b>Agentic AI</b> is AI that works towards a goal across several steps, using tools as it goes, instead of answering 1 message at a time. Ask a chat assistant for a spreadsheet and you get advice or a first draft. Give an agent the goal and it can build the file, test it and bring it back for you to check. You stop driving the digger and start directing the site. What it can do depends on the tool, its access and the limits you set.</p>
 <p>In my view, anyone who uses AI only as a chat box is leaving most of the benefit unused. I am not a coder, yet the quiz and the self-diagnostic on this site were built this way: I described what I wanted, the AI built it, and I checked the result.</p>
-<p>Directing is still a job: you hold the plan, decide what needs your approval and check the result. An agent that can act can also make mistakes at speed, so the 3 questions matter more here, not less. Both terms are in the <a href="https://mahdioneill.github.io/ai-fluency/challenge/#glossary" target="_blank" rel="noopener">jargon buster</a>.</p>
+<p>Directing is still a job: you hold the plan, decide what needs your approval and check the result. An agent that can act can also make mistakes at speed, so the 2 checks matter more here, not less. Both terms are in the <a href="https://mahdioneill.github.io/ai-fluency/challenge/#glossary" target="_blank" rel="noopener">jargon buster</a>.</p>
 <h2 id="why">Where to start</h2>
 <p>Your reason for learning tells you where to start. Most people are a mix. Pick the one that is loudest this month.</p>
 <div class="motives"><div class="chips" role="group" aria-label="Your main reason"><button type="button" class="chip" aria-pressed="false" aria-controls="motive-0">I am curious</button><button type="button" class="chip" aria-pressed="false" aria-controls="motive-1">I have a task to solve</button><button type="button" class="chip" aria-pressed="false" aria-controls="motive-2">My employer expects me to use it</button><button type="button" class="chip" aria-pressed="false" aria-controls="motive-3">I feel behind</button><button type="button" class="chip" aria-pressed="false" aria-controls="motive-4">I oversee people who use it</button></div><div aria-live="polite"><div class="mpanel" id="motive-0"><p><b>You are curious.</b> You want to understand what these tools can do. Try <a href="https://mahdioneill.github.io/ai-fluency/challenge/" target="_blank" rel="noopener">the challenge</a>, read around a topic and explore a tool. Follow what interests you.</p><p class="start"><a href="https://mahdioneill.github.io/ai-fluency/challenge/" target="_blank" rel="noopener">Start with the challenge &rarr;</a></p></div><div class="mpanel" id="motive-1"><p><b>You have a task to solve.</b> Something in your work now needs it: a process has changed, a client expects it, a report has to be done a new way. Find the 1 task, learn only what that task needs, and let the rest wait.</p><p class="start"><a href="#doing">Start with learning by doing &rarr;</a></p></div><div class="mpanel" id="motive-2"><p><b>Your employer expects you to use it.</b> A tool has been rolled out and you are expected to use it. Start with the tool you have been given, not the one you read about. Learn the 3 or 4 features that matter for your work, and ask who in your organisation already uses it well.</p><p class="start"><a href="#courses">Start with the vendors’ academies &rarr;</a></p></div><div class="mpanel" id="motive-3"><p><b>You feel behind.</b> You are in good company: even people who work with AI every day say the pace is hard to follow. Choose 1 useful topic and return to it each week; you do not need to follow every announcement.</p><p class="start"><a href="#routine">Start with the weekly routine &rarr;</a></p></div><div class="mpanel" id="motive-4"><p><b>You oversee people who use it.</b> Focus on capabilities, limitations and the questions to ask. A short demonstration and a few supervised experiments can make the governance issues more concrete. The <a href="https://mahdioneill.github.io/ai-fluency/challenge/#board" target="_blank" rel="noopener">Board track</a> of the challenge is written for this.</p><p class="start"><a href="https://mahdioneill.github.io/ai-fluency/challenge/#board" target="_blank" rel="noopener">Start with the Board track &rarr;</a></p></div></div></div>
