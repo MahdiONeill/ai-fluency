@@ -80,6 +80,14 @@
   .strip { margin: 10px 0 14px; }
   .strip .panels { display: flex; gap: 8px; align-items: stretch; }
   .strip .panels img { display: block; min-width: 0; height: auto; border: 1px solid var(--rule); border-radius: 4px; background: #fff; }
+  details.reveal { max-width: 640px; margin: -4px 0 14px; }
+  details.reveal > summary { display: inline-block; font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-text); border: 1px solid var(--rule); background: #fbf9f5; padding: 10px 14px; }
+  details.reveal > summary::before { content: '+'; display: inline-block; width: 16px; color: var(--gold); }
+  details.reveal[open] > summary::before { content: '\2212'; }
+  details.reveal > summary:hover { border-color: var(--gold); }
+  details.reveal figure { margin: 10px 0 0; }
+  details.reveal img { display: block; width: 100%; height: auto; border: 1px solid var(--rule); }
+  details.reveal figcaption { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 17px; color: var(--muted); margin-top: 7px; }
   .strip figcaption { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 17px; color: var(--muted); margin-top: 7px; }
   .strip .swipe { display: none; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
   /* why picker: without JavaScript every paragraph shows and the chips stay hidden */
@@ -249,11 +257,13 @@
 <div class="prompt"><div class="lb"><span>A starter prompt</span><button class="copy" data-copy="6">Copy</button></div><div class="tx">I am a [role] in [sector], using [tool]. I regularly [describe the task]. Suggest which steps you could do for me and which need my judgement. For each one, say what information or access you would need and how I could check the result. Tell me if you are unsure which features I have. Then suggest 1 small experiment I could try today.</div><textarea class="copybox" readonly></textarea></div>
 <p><b>Stay inside your controls.</b> This is your real work, so the <a href="#risk">sensible controls</a> matter most here: what you put in, which account you use, and checking what comes out.</p>
 <p><b>Judge the result.</b> What was right, and what needed correcting? Do not expect AI always to save you time. Sometimes the gain is time, sometimes it is quality, and sometimes it is both. Stay with that task for a few weeks. That is how you see yourself improve.</p>
-<p><b>Keep a human in the loop.</b> It is easy to get carried away. AI output can look good on the surface and fall apart when you dig. Check it, question it and use your own judgement. That is how you avoid what I call the AI slop monster.</p>
+<p><b>Keep a human in the loop.</b> It is easy to get carried away and start taking shortcuts. Even experienced users do it: they produce something with AI and pass it on without reviewing it. What looks good on the surface can turn out, when you dig, to be a pile of AI slop. So review it, question it and use your own judgement. That is how you avoid what I call the AI slop monster.</p>
+<details class="reveal"><summary>Meet the AI slop monster</summary><figure><img src="slop-monster.webp" width="1280" height="853" alt="Ink sketch of an office with the Dubai skyline in the window. A smug grey blob monster in a collar and tie hugs a glossy report tied with a gold ribbon and marked with a gold star. The bottom of the report has burst and pages of scribble pour onto the table. A woman in an abaya looks at it over her glasses, unimpressed." loading="lazy" decoding="async"><figcaption>Shiny on the outside. Check the inside.</figcaption></figure></details>
 <p><b>Keep a learning log.</b> What you learn and do not use straight away, you forget. I keep my log in Claude as an <a href="https://mahdioneill.github.io/ai-fluency/challenge/#glossary=artifact" target="_blank" rel="noopener">artifact</a>, a saved document that Claude can update. Whenever I learn something, on my laptop or on my phone, I say “add this to my learning log”, and it is there the next time I open it anywhere.</p>
 <div class="prompt"><div class="lb"><span>Start a learning log</span><button class="copy" data-copy="7">Copy</button></div><div class="tx">Create a learning log for me as a document I can keep. Give each entry today’s date, what I learned, why it matters for my work, how I will use it and the source. Put the newest first. From now on, when I say “add this to my learning log”, add an entry.</div><textarea class="copybox" readonly></textarea></div>
 <p>Any assistant that can keep a saved document will do the same. So will a plain document you update yourself.</p>
 <p><b>The hard part is knowing what else to ask for.</b> If you have only used AI as a chat box, it may not occur to you to ask it for a working spreadsheet, to read your email or to run a task on a schedule. Depending on the tool and the access you give it, it may do all 3. The <a href="https://mahdioneill.github.io/ai-fluency/diagnostic/" target="_blank" rel="noopener">self-diagnostic</a> maps the opportunities in your own work.</p>
+<p><b>It is not only for work on a screen.</b> AI can help you prepare for a client meeting or a difficult conversation with your manager. Switch to voice mode and rehearse it aloud: ask the AI to play the other person, then to tell you how you did.</p>
 <p><b>Keep learning.</b> Being AI fluent is not the finish line. In AI, a year is a very long time, and the best way to do a task keeps changing. Stay curious.</p></div></details>
 </div>
 <h2 id="library">Prompt library</h2>
